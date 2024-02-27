@@ -1,12 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Meus Artigos</title>
+    <title>Artigos</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
     <style>
-    body {
+   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -37,9 +38,8 @@
     width: 100%;
 }
 
-.navbar a.home-icon,
 .navbar .search-bar {
-    margin: 0 120px;
+    margin: 0 auto; /* Centraliza o mecanismo de busca */
 }
 
 .card {
@@ -156,16 +156,107 @@ footer {
     border-radius: 8px; /* Adiciona bordas arredondadas para uma aparência mais suave */
 }
 
+/* Estilo para o modal de busca */
+#searchModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-height: calc(100% - 40px);
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #717272; /* Nova cor de fundo do modal de busca */
+    border-radius: 8px;
+    text-align: center;
+    width: 80%;
+}
+
+#searchModal h2 {
+    margin-bottom: 20px;
+    color: #fff; /* Cor do texto do título do modal de busca */
+}
+
+#searchModal table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#searchModal th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    color: #333; /* Cor do texto dos títulos das tabelas */
+    background-color: #f2f2f2; /* Cor de fundo dos títulos das tabelas */
+    font-weight: bold;
+}
+
+#searchModal td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    color: #333; /* Cor do texto das células das tabelas */
+}
+
+#searchModal tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#searchModal tr:hover {
+    background-color: #ddd;
+}
+
+#searchModal a {
+    text-decoration: none;
+    color: #080808;
+}
+
+#searchModal a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para o botão de fechar o modal de busca */
+#searchModal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#searchModal .close:hover,
+#searchModal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <a class="home-icon" href="/"><i class="fas fa-home"></i></a>
-        <div class="search-bar">
-            <input placeholder="Buscar Artigos..." type="text"/>
-            <input type="submit" value="Buscar"/>
-        </div>
+        <form>
+            <input type="text" placeholder="Pesquisar...">
+            <input type="submit" value="Buscar">
+        </form>
+        <!-- Modal de busca -->
+<div id="searchModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeSearchModal()">&times;</span> <!-- Botão de fechar -->
+        <h2>Resultados da Busca</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Assunto</th>                    
+                </tr>
+            </thead>
+            <tbody id="searchResults">
+                <!-- Aqui serão inseridos os resultados da busca -->
+            </tbody>
+        </table>
+    </div>
+</div>
     </nav>
     <div class="container">
         <div class="card">
@@ -223,56 +314,110 @@ footer {
         <p>2024</p>
     </footer>
 
-    <div class="modal" id="articleModal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">×</span>
-            <h2 id="modalTitle">Article Title</h2>
-            <img alt="Article Image" id="modalImage" src="" style="max-width: 100%; height: auto;"/>
-            <div id="modalText"></div> <!-- Espaço para até 4 parágrafos -->
-        </div>
+    <!-- Modal de artigo -->
+<div id="articleModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span> <!-- Botão de fechar o modal -->
+        <h2 id="modalTitle">Título do Artigo</h2>
+        <img id="modalImage" src="https://via.placeholder.com/600" alt="">
+        <div id="modalText"></div>
     </div>
+</div>
 
     <script>
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function(event) {
+  document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.card');
+    const searchForm = document.querySelector('.navbar form');
+    const searchInput = document.querySelector('.navbar input[type="text"]');
+    const searchModal = document.getElementById('searchModal');
+    const searchResults = document.getElementById('searchResults');
+    const articleModal = document.getElementById('articleModal');
+
+    // Função para fechar o modal de busca
+    window.closeSearchModal = () => {
+        searchModal.style.display = 'none';
+        searchInput.value = ''; // Limpa o campo de pesquisa
+        searchResults.innerHTML = ''; // Limpa os resultados da busca
+    }
+
+    // Função para fechar o modal de artigo
+    window.closeModal = () => {
+        articleModal.style.display = 'none';
+    }
+
+    // Adiciona eventos aos botões "Ler"
+    cards.forEach((card, index) => {
+        const btn = card.querySelector('.btn');
+        btn.addEventListener('click', function(event) {
+            event.preventDefault();
+            const title = card.querySelector('h2').textContent;
+            const imgSrc = card.querySelector('img').src;
+            const articleData = card.querySelector('.article-text').textContent;
+            const articleParts = JSON.parse(articleData).parts;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalImage').src = imgSrc;
+            document.getElementById('modalText').innerHTML = '';
+
+            articleParts.forEach(part => {
+                const paragraph = document.createElement('p');
+                paragraph.textContent = part;
+                document.getElementById('modalText').appendChild(paragraph);
+            });
+
+            articleModal.style.display = 'block';
+        });
+    });
+
+    // Adiciona evento de envio ao formulário de pesquisa
+    searchForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        const card = this.closest('.card');
-        const title = card.querySelector('h2').textContent;
-        const imgSrc = card.querySelector('img').src;
-        const articleData = card.querySelector('.article-text').textContent;
-        const articleParts = JSON.parse(articleData).parts.slice(0, 4); // Limita para os primeiros 4 parágrafos
-        const modal = document.getElementById('articleModal');
-        document.getElementById('modalTitle').textContent = title;
-        document.getElementById('modalImage').src = imgSrc;
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        searchResults.innerHTML = ''; // Limpa os resultados anteriores
 
-        // Limpa o texto atual do modal
-        document.getElementById('modalText').innerHTML = '';
-
-        // Adiciona até 4 parágrafos do artigo ao modal
-        articleParts.forEach(part => {
-            const paragraph = document.createElement('p');
-            paragraph.textContent = part;
-            document.getElementById('modalText').appendChild(paragraph);
+        cards.forEach((card, index) => {
+            const title = card.querySelector('h2').textContent.trim().toLowerCase();
+            const imgSrc = card.querySelector('img').src; // URL da imagem
+            const articleData = card.querySelector('.article-text').textContent.toLowerCase(); // Conteúdo do artigo
+            if (title.includes(searchTerm) || articleData.includes(searchTerm)) {
+                const row = document.createElement('tr');
+                const linkCell = document.createElement('td');
+                const link = document.createElement('a');
+                link.href = `#${index}`;
+                link.textContent = title;
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const articleContent = card.querySelector('.article-text').textContent;
+                    const img = document.createElement('img'); // Criar elemento de imagem
+                    img.src = imgSrc; // Definir URL da imagem
+                    articleModal.style.display = 'block';
+                    document.getElementById('modalImage').src = imgSrc; // Definir imagem no modal de artigo
+                    document.getElementById('modalText').innerHTML = ''; // Limpar o conteúdo existente
+                    const articleParts = JSON.parse(articleContent).parts; // Obter todas as partes do artigo
+                    articleParts.forEach(part => {
+                        const paragraph = document.createElement('p');
+                        paragraph.textContent = part;
+                        document.getElementById('modalText').appendChild(paragraph); // Adicionar cada parte do artigo ao modal
+                    });
+                });
+                linkCell.appendChild(link);
+                row.appendChild(linkCell);
+                row.style.color = '#333';
+                row.style.background = '#f2f2f2';
+                searchResults.appendChild(row);
+            }
         });
 
-        modal.style.display = 'block';
-
-        // Fechar o modal ao clicar fora dele
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                closeModal();
-            }
+        if (searchResults.innerHTML === '') {
+            searchResults.innerHTML = '<tr><td style="color: #333;">Nenhum resultado encontrado.</td></tr>';
         }
+
+        searchModal.style.display = 'block';
     });
+
+    // Adiciona evento ao botão de fechar do modal de busca
+    const closeSearchModalBtn = document.querySelector('#searchModal .close');
+    closeSearchModalBtn.addEventListener('click', closeSearchModal);
 });
-
-const closeModal = () => {
-    const modal = document.getElementById('articleModal');
-    modal.style.display = 'none';
-}
-
-const closeBtn = document.querySelector('.close');
-closeBtn.addEventListener('click', closeModal);
 
     </script>
 </body>
