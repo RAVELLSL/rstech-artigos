@@ -244,21 +244,33 @@ footer {
 
 @media screen and (max-width: 768px) {
   .modal {
-    width: 100%;
-    max-width: none;
+    position: fixed; /* Altera o posicionamento para fixo */
+    top: 0;
     left: 0;
-    transform: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adiciona uma camada escura de fundo */
+    z-index: 1000; /* Garante que o modal esteja acima do restante do conteúdo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .modal-content {
-    width: 100%;
-    max-width: none;
+    width: 80%; /* Define a largura do conteúdo do modal */
+    max-width: 600px; /* Define a largura máxima */
+    background-color: #fefefe;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    position: relative; /* Ajusta o posicionamento relativo ao modal */
   }
   .modal img {
-    width: 100%;
+    max-width: 100%; /* Garante que a imagem não ultrapasse a largura do conteúdo do modal */
     height: auto;
-    border-radius: 0; /* Remover borda arredondada */
+    border-radius: 8px;
   }
 }
+
 
 
     </style>
