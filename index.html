@@ -263,10 +263,7 @@ footer {
     background-color: #fefefe;
     border-radius: 8px;
     padding: 20px;
-    text-align: center;
-    position: relative; /* Adicione a posição relativa para alinhar corretamente */
-    top: 50%; /* Move o modal para o centro vertical */
-    transform: translateY(-50%); /* Ajusta a posição vertical */
+    text-align: justify; /* Ajuste para justificar o texto */
   }
   .modal img {
     max-width: 100%;
@@ -275,7 +272,9 @@ footer {
   }
   /* Adiciona estilo para exibir o modal quando aberto */
   .modal.show {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
