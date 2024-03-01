@@ -282,28 +282,26 @@ footer {
 }
 
 
+/* Estilos do modal em telas menores */
+
 @media screen and (max-width: 768px) {
-  .container {
-    width: 100%;
-    padding: 0 10px;
-  }
-  .card {
-    width: 100%;
-    margin: 20px 0;
-  }
-  .card img {
-    height: auto;
-    max-width: 100%;
-  }
-  .modal-content {
-    width: auto;
-    padding: 20px;
-  }
-  .modal img {
-    max-width: 100%;
-    height: auto;
-  }
+    .modal-content {
+        width: 90%; /* Ajusta a largura do conteúdo do modal para ocupar 90% da tela */
+        padding: 20px;
+        margin: 10% auto; /* Centraliza verticalmente */
+    }
+    .modal img {
+        max-width: 100%; /* Garante que as imagens se ajustem à largura do modal */
+        height: auto;
+    }
+
+    /* Ajuste do tamanho do texto dos artigos */
+    .article-text p {
+        font-size: 16px; /* Tamanho da fonte dos parágrafos dos artigos */
+        line-height: 1.6; /* Espaçamento entre linhas dos parágrafos dos artigos */
+    }
 }
+
 
 
 
