@@ -246,7 +246,7 @@ footer {
 @media screen and (max-width: 768px) {
   .modal {
     display: none; /* Oculta o modal por padrão */
-    position: auto;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -256,16 +256,17 @@ footer {
     overflow: auto; /* Adiciona rolagem para o modal se necessário */
   }
   .modal-content {
-    position: absolute; /* Ajusta o posicionamento do conteúdo do modal */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: auto /* Define a largura do conteúdo do modal */
+    /* Remova o posicionamento absoluto */
+    margin: auto; /* Adiciona margens automáticas para centralizar o modal */
+    width: 90%; /* Define a largura do conteúdo do modal */
     max-width: 600px; /* Define a largura máxima */
     background-color: #fefefe;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
+    position: relative; /* Adicione a posição relativa para alinhar corretamente */
+    top: 50%; /* Move o modal para o centro vertical */
+    transform: translateY(-50%); /* Ajusta a posição vertical */
   }
   .modal img {
     max-width: 100%;
