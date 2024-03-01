@@ -243,9 +243,20 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
+  .modal {
+    width: 100%;
+    max-width: none;
+    left: 0;
+    transform: none;
+  }
   .modal-content {
     width: 100%;
     max-width: none;
+  }
+  .modal img {
+    width: 100%;
+    height: auto;
+    border-radius: 0; /* Remover borda arredondada */
   }
 }
 
