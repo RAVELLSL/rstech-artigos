@@ -7,143 +7,173 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
         body {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #ADD8E6, #FFFFFF, #ADD8E6);
-            min-height: 100vh;
-        }
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #ADD8E6, #FFFFFF, #ADD8E6);
+    min-height: 100vh;
+}
 
-        .header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
+.header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
 
-        .container {
-            width: 80%;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
+.container {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px; /* Corrigido para evitar grandes espaços */
+}
 
-        h2 {
-            font-size: 30px;
-            margin: 0;
-        }
+h2 {
+    font-size: 30px;
+    margin: 0;
+}
 
-        .article {
-            margin-bottom: 40px;
-        }
+.article {
+    margin-bottom: 40px;
+}
 
-        .article-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+.article-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-        .article-description {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 10px;
-            text-align: justify;
-        }
+.article-description {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: justify;
+}
 
-        .read-more-btn {
-            background: linear-gradient(to bottom, #444444, #000000);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+.read-more-btn {
+    background: linear-gradient(to bottom, #444444, #000000);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 
-        .read-more-btn:hover {
-            background: linear-gradient(to bottom, #000000, #444444);
-        }
+.read-more-btn:hover {
+    background: linear-gradient(to bottom, #000000, #444444);
+}
 
-        .article-img {
-            width: 100%;
-            display: block;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
+.modal-content {
+    display: none; /* Esconder o conteúdo do modal por padrão */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
 
-        .modal-content {
-            display: none;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #FFFFFF;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-        }
+.article-img {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
 
-        .modal-content p {
-            font-family: 'Arial', sans-serif;
-            font-size: 18.5px;
-            text-align: justify;
-            margin-bottom: 10px;
-        }
+.footer {
+    background-color: transparent;
+    font-weight: bold;
+    color: #131212;
+    text-align: center;
+    padding: 5px 0;
+}
 
-        .modal-content img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
+.page-numbers {
+    display: inline-block;
+    margin: 0 10px;
+}
 
-        .footer {
-            background-color: transparent;
-            font-weight: bold;
-            color: #131212;
-            text-align: center;
-            padding: 5px 0;
-        }
+.page-numbers span {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
 
-        .audio-player {
-            display: block;
-            margin: 10px auto;
-            width: 90%;
-        }
+.page-numbers span.active {
+    background-color: #333;
+    color: #fff;
+}
 
-        @media only screen and (max-width: 600px) {
-            .container {
-                width: 90%;
-                padding: 10px;
-            }
+.page-numbers span:hover {
+    background-color: #555;
+    color: #fff;
+}
 
-            h2 {
-                font-size: 26px;
-            }
+button, .read-more-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
 
-            .article-title {
-                font-size: 20px;
-                text-align: center;
-            }
+button:hover, .read-more-btn:hover {
+    background-color: #555;
+}
 
-            .article-description {
-                font-size: 16px;
-                text-align: justify;
-            }
+.pagination-container {
+    text-align: center;
+    margin: 20px 0; /* Ajuste no espaçamento da paginação */
+    padding: 0;
+    border: none;
+}
 
-            .modal-content p {
-                text-align: left;
-                font-size: 16px;
-            }
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 10px;
+    }
 
-            .read-more-btn {
-                font-size: 16px;
-                padding: 12px 24px;
-            }
-        }
+    h2 {
+        font-size: 26px;
+    }
+
+    .article-title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .article-description {
+        font-size: 16px;
+        text-align: justify;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    h2 {
+        font-size: 22px;
+    }
+    .article-title {
+        font-size: 18px;
+    }
+    .article-description {
+        font-size: 14px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -340,21 +370,131 @@
                 <p>À medida que a sinergia entre computação quântica e inteligência artificial se aprofunda, a expectativa é de que sejam alcançados avanços verdadeiramente revolucionários em todos os aspectos da vida humana. Essa colaboração entre duas áreas tão promissoras da tecnologia não apenas promete impulsionar a inovação, mas também tem o potencial de transformar fundamentalmente a maneira como vivemos e interagimos com o mundo ao nosso redor. Em um mundo onde a quantidade de dados gerados continua a crescer exponencialmente, a capacidade dos sistemas baseados em IA de processar e interpretar essas informações de maneira rápida e precisa é crucial. A computação quântica oferece o impulso adicional, proporcionando um poder de processamento sem precedentes para lidar com conjuntos de dados cada vez maiores e mais complexos.</p>
             </div>
         </div>
-    </div>
-    <div class="footer">2024</div>
-    <script>
-        function toggleModal(modalId) {
-            var modal = document.getElementById(modalId);
-            var btn = document.querySelector(`button[data-modal="${modalId}"]`);
+    </div>   
 
-            if (modal.style.display === "none" || modal.style.display === "") {
-                modal.style.display = "block";
-                btn.textContent = "Fechar";
+    <div class="pagination-container">
+        <button id="prev-btn" onclick="prevPage()">Anterior</button>
+        <div id="page-numbers" class="page-numbers"></div>
+        <button id="next-btn" onclick="nextPage()">Próximo</button>
+    </div>
+
+    <div class="footer">2024</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const articlesPerPage = 5;
+    let currentPage = 1;
+
+    const articles = Array.from(document.querySelectorAll('.article')); // Pega todos os artigos do HTML
+    const totalPages = Math.ceil(articles.length / articlesPerPage);
+
+    // Função para renderizar os artigos
+    function renderArticles(page) {
+        const start = (page - 1) * articlesPerPage;
+        const end = page * articlesPerPage;
+
+        // Esconde todos os artigos primeiro e garante que não exista margem em artigos ocultos
+        articles.forEach((article, index) => {
+            if (index >= start && index < end) {
+                article.style.display = 'block'; // Mostra o artigo na página
+                article.style.marginBottom = '40px'; // Redefine a margem para artigos visíveis
             } else {
-                modal.style.display = "none";
-                btn.textContent = "Ler mais";
+                article.style.display = 'none'; // Esconde os outros artigos
+                article.style.marginBottom = '0'; // Remove a margem de artigos ocultos
             }
+        });
+
+        renderPageNumbers();
+        scrollToTop();
+
+        // Habilita/Desabilita os botões "anterior" e "próximo"
+        document.getElementById('prev-btn').disabled = page === 1;
+        document.getElementById('next-btn').disabled = page === totalPages;
+    }
+
+    // Função para gerar os números da paginação
+    function renderPageNumbers() {
+        const pageNumbersContainer = document.getElementById('page-numbers');
+        pageNumbersContainer.innerHTML = ''; // Limpa o conteúdo anterior
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageNumberElement = document.createElement('span');
+            pageNumberElement.innerText = i;
+            if (i === currentPage) {
+                pageNumberElement.classList.add('active');
+            }
+            pageNumberElement.addEventListener('click', () => goToPage(i));
+            pageNumbersContainer.appendChild(pageNumberElement);
         }
+    }
+
+    // Função para ir para uma página específica
+    function goToPage(page) {
+        currentPage = page;
+        renderArticles(currentPage);
+    }
+
+    // Função para ir para a próxima página
+    function nextPage() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderArticles(currentPage);
+        }
+    }
+
+    // Função para ir para a página anterior
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderArticles(currentPage);
+        }
+    }
+
+    // Função para rolar para o topo ao mudar de página
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Função para abrir e fechar os modais
+    function toggleModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const btn = document.querySelector(`button[data-modal="${modalId}"]`);
+
+        if (modal.style.display === 'none' || modal.style.display === '') {
+            modal.style.display = 'block';
+            btn.textContent = 'Fechar';
+        } else {
+            modal.style.display = 'none';
+            btn.textContent = 'Ler mais';
+        }
+    }
+
+    // Fechar o modal ao clicar fora dele
+    window.addEventListener('click', function(event) {
+        const modals = document.querySelectorAll('.modal-content');
+        modals.forEach(modal => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                const btn = document.querySelector(`button[data-modal="${modal.id}"]`);
+                btn.textContent = 'Ler mais';
+            }
+        });
+    });
+
+    // Inicializa os artigos e a paginação
+    renderArticles(currentPage);
+
+    // Adiciona eventos aos botões "anterior" e "próximo"
+    document.getElementById('prev-btn').addEventListener('click', prevPage);
+    document.getElementById('next-btn').addEventListener('click', nextPage);
+
+    // Adiciona eventos para os botões "Ler mais" de cada artigo
+    document.querySelectorAll('.read-more-btn').forEach(button => {
+        const modalId = button.getAttribute('data-modal');
+        button.addEventListener('click', () => toggleModal(modalId));
+    });
+});
+
     </script>
 </body>
 </html>
