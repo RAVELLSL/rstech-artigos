@@ -6,94 +6,128 @@
     <title>Artigos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
-        body {
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap');
+
+body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #ADD8E6, #FFFFFF, #ADD8E6);
+    background: linear-gradient(to right, #e6f0fa, #ffffff, #e6f0fa);
     min-height: 100vh;
 }
 
+/* Cabeçalho com tema cyberpunk, mas sem fundo preto */
 .header {
-    background-color: #333;
-    color: #fff;
+    background-color: #101f3f; /* Azul escuro suave */
+    color: #00bfff; /* Azul neon */
     text-align: center;
-    padding: 20px 0;
+    padding: 40px 0;
+    font-size: 28px;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 4px #00bfff, 0 0 8px #00bfff, 0 0 15px #00bfff;
+    letter-spacing: 2px;
 }
 
+.header h2 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 800;
+    color: #00bfff;
+    text-shadow: 0 0 4px #00bfff, 0 0 8px #00bfff, 0 0 15px #00bfff;
+}
+
+/* Área dos artigos */
 .container {
     width: 80%;
-    max-width: 800px;
+    max-width: 900px;
     margin: 20px auto;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px; /* Corrigido para evitar grandes espaços */
 }
 
-h2 {
-    font-size: 30px;
-    margin: 0;
+/* Artigos com cores alternadas suaves */
+.article:nth-child(even) {
+    background-color: #f0f8ff;
+}
+
+.article:nth-child(odd) {
+    background-color: #fefefe;
 }
 
 .article {
-    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    margin-bottom: 25px;
 }
 
+/* Título dos artigos centralizado */
 .article-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
+    text-align: center;
 }
 
+/* Descrição dos artigos */
 .article-description {
     font-size: 18px;
-    color: #555;
-    margin-bottom: 10px;
+    color: #444;
+    margin-bottom: 15px;
     text-align: justify;
 }
 
+/* Botões centralizados */
 .read-more-btn {
-    background: linear-gradient(to bottom, #444444, #000000);
+    background: linear-gradient(to bottom, #444, #000);
     border: none;
     color: white;
     padding: 10px 20px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 14px;
     cursor: pointer;
     border-radius: 5px;
+    display: block;
+    margin: 0 auto 10px auto;
     transition: background-color 0.3s ease;
 }
 
 .read-more-btn:hover {
-    background: linear-gradient(to bottom, #000000, #444444);
+    background: linear-gradient(to bottom, #000, #444);
 }
 
+/* Conteúdo oculto dos modais */
 .modal-content {
-    display: none; /* Esconder o conteúdo do modal por padrão */
+    display: none;
     padding: 20px;
     border-radius: 10px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     margin-top: 10px;
 }
 
+/* Imagens dos artigos ajustadas */
 .article-img {
-    width: 100%;
+    width: 850px;
+    max-width: 100%;
     display: block;
-    margin-bottom: 10px;
+    margin: 0 auto 15px auto;
     border-radius: 10px;
 }
 
+/* Rodapé */
 .footer {
     background-color: transparent;
     font-weight: bold;
     color: #131212;
     text-align: center;
-    padding: 5px 0;
+    padding: 10px 0;
+}
+
+/* Paginação */
+.pagination-container {
+    text-align: center;
+    margin: 20px 0;
+    padding: 0;
+    border: none;
 }
 
 .page-numbers {
@@ -119,6 +153,7 @@ h2 {
     color: #fff;
 }
 
+/* Botões de paginação */
 button, .read-more-btn {
     background-color: #333;
     color: #fff;
@@ -134,13 +169,7 @@ button:hover, .read-more-btn:hover {
     background-color: #555;
 }
 
-.pagination-container {
-    text-align: center;
-    margin: 20px 0; /* Ajuste no espaçamento da paginação */
-    padding: 0;
-    border: none;
-}
-
+/* Responsividade */
 @media only screen and (max-width: 600px) {
     .container {
         width: 90%;
@@ -160,15 +189,21 @@ button:hover, .read-more-btn:hover {
         font-size: 16px;
         text-align: justify;
     }
+
+    .article-img {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 400px) {
     h2 {
         font-size: 22px;
     }
+
     .article-title {
         font-size: 18px;
     }
+
     .article-description {
         font-size: 14px;
     }
@@ -181,6 +216,83 @@ button:hover, .read-more-btn:hover {
         <h2>Artigos</h2>
     </div>
     <div class="container">
+
+        <div class="article">
+            <div class="article-title">O Cérebro como um Computador Biológico</div>
+            <div class="article-description">
+                A metáfora do cérebro como uma máquina de processamento de informações inspira avanços tecnológicos e científicos, mas também revela os limites da comparação entre o humano e o digital. Este artigo investiga até onde essa analogia é válida e quais implicações ela traz para a compreensão da mente.
+            </div>
+            <button class="read-more-btn" onclick="toggleModal('modal17')" data-modal="modal17">Ler mais</button>
+            <div class="modal-content" id="modal17">
+                <img class="article-img" src="https://i.ibb.co/qPh5vGd/O-c-rebro-como-um-computador-biol-gico.png" alt="O cérebro como um computador biológico">
+                <iframe src="https://drive.google.com/file/d/1YGFQvzd_vqmHemScFzcHeQen2q1s9wwD/preview" width="100%" height="80"></iframe>
+                <p>Desde que os computadores passaram a integrar a vida cotidiana, tornou-se comum compará-los ao cérebro humano. A ideia de que a mente opera como um sistema de processamento de informações ganhou força na ciência e na cultura, impulsionando avanços em diversas áreas. No entanto, será que essa analogia é precisa ou apenas uma projeção tecnológica sobre a nossa biologia?</p>
+                <p>A princípio, a comparação parece funcional: o cérebro recebe informações, processa, armazena memórias e gera respostas. Neurônios seriam os transistores, axônios e dendritos os fios condutores, e os neurotransmissores os protocolos de comunicação. A memória de trabalho se equipararia à RAM e a de longo prazo ao disco rígido.</p>
+                <p>Essa visão inspirou o desenvolvimento da inteligência artificial, com redes neurais artificiais baseadas em estruturas cerebrais. A metáfora funcionou como motor conceitual para avanços no reconhecimento de padrões e simulações cognitivas, contribuindo significativamente para o progresso da ciência da computação e da neurociência.</p>
+                <p>Contudo, quanto mais aprofundamos nosso entendimento do cérebro, mais evidentes se tornam as limitações dessa comparação. O cérebro não segue instruções determinísticas, mas opera de maneira adaptativa e probabilística. Memórias são plásticas, reconstruídas e emocionalmente moduladas — longe de um simples armazenamento digital.</p>
+                <p>Neurônios não funcionam como interruptores binários. Sua atividade depende de gradientes, modulações químicas e interações altamente complexas. São afetados por centenas de neurotransmissores e moduladores que operam em tempo, intensidade e contexto, elementos ausentes na lógica computacional tradicional.</p>
+                <p>O tempo no cérebro também é diferente. Enquanto computadores operam em ciclos regulares e previsíveis, o cérebro lida com o tempo de forma subjetiva. Emoções, estados de atenção e experiências alteram a percepção temporal, o que confere à mente uma dimensão existencial que foge à precisão digital.</p>
+                <p>Outro fator determinante é o corpo. Computadores são sistemas lógico-formais isolados. Já o cérebro humano está inserido em um corpo sensível e interativo, onde a cognição é moldada por emoções, movimentos, sensações e experiências táteis. A mente não é apenas cérebro — é corpo, ambiente, cultura.</p>
+                <p>Adicionalmente, existe a consciência: a capacidade de saber que sabemos, de ter experiências subjetivas. Computadores não têm consciência, intenção ou percepção. São sistemas que executam comandos, mas não sentem, não refletem, não possuem “qualia” — a essência da experiência subjetiva.</p>
+                <p>Mesmo os sistemas mais avançados de IA não possuem compreensão real. Suas respostas são frutos de cálculos e estatísticas, não de entendimento. A criatividade humana, por sua vez, nasce da vivência, da emoção, do contexto — algo que escapa a qualquer modelagem computacional até hoje existente.</p>
+                <p>Ainda assim, a analogia com computadores é produtiva. Ela organiza o pensamento científico, orienta pesquisas e inspira tecnologias. Mas é preciso reconhecer seus limites. Tomar essa comparação como literal é correr o risco de empobrecer a compreensão do humano, reduzindo a mente a um sistema técnico e mensurável.</p>
+                <p>Há implicações éticas e filosóficas nesse reducionismo. Em um mundo onde neurotecnologias e IA se expandem, tratar o ser humano como um sistema mecânico pode levar a decisões desumanizantes, negligenciando aspectos subjetivos, simbólicos e espirituais que constituem a nossa existência.</p>
+                <p>Talvez o maior valor esteja no diálogo entre o biológico e o computacional. Máquinas nos ajudam a entender o cérebro, e o cérebro nos inspira a criar máquinas. Mas é na diferença entre eles que reside a chave da compreensão mais profunda da mente humana.</p>
+                <p>Pensar o cérebro como um computador biológico é uma metáfora útil, mas incompleta. Assim como ler uma partitura não é o mesmo que ouvir a sinfonia, compreender a estrutura da mente não é o mesmo que sentir sua complexidade. O cérebro é mais do que dados — é memória, emoção, intuição e poesia.</p>
+            </div>
+        </div>
+        
+        
+        <div class="article">
+            <div class="article-title">Como a Computação Quântica Muda Nossa Percepção da Realidade</div>
+            <div class="article-description">
+                A computação quântica não apenas revoluciona a tecnologia, mas abala os fundamentos de nossa percepção sobre o real. Este artigo explora como os princípios quânticos nos obrigam a repensar a lógica, a causalidade e a própria natureza da existência.
+            </div>
+            <button class="read-more-btn" onclick="toggleModal('modal16')" data-modal="modal16">Ler mais</button>
+            <div class="modal-content" id="modal16">
+                <img class="article-img" src="https://i.ibb.co/xKnCVnJ4/Como-a-computa-o-qu-ntica-muda-nossa-percep-o-da-realidade.png" alt="Computação Quântica e Realidade">
+                <iframe src="https://drive.google.com/file/d/1vCaA_0JJ6Q1kZLJfFZ-zoiq7aKNswsBx/preview" width="100%" height="80"></iframe>
+                <p>Durante séculos, a ciência se estruturou sobre uma base sólida de previsibilidade. As leis de Newton, o raciocínio cartesiano e os cálculos deterministas moldaram a forma como entendemos o mundo. Mas com a ascensão da computação quântica, essa estrutura começa a rachar, desafiando os próprios fundamentos da realidade como conhecemos.</p>
+                <p>Baseada nos princípios da mecânica quântica, essa nova forma de computação opera com conceitos como superposição, emaranhamento e interferência. Um qubit pode assumir múltiplos estados ao mesmo tempo, permitindo que sistemas quânticos explorem simultaneamente diversas possibilidades — uma ruptura radical com a lógica binária dos computadores clássicos.</p>
+                <p>A metáfora de ler todos os capítulos de um livro ao mesmo tempo ajuda a ilustrar a superposição. O emaranhamento, por sua vez, sugere uma conexão instantânea entre partículas separadas por grandes distâncias. Esses fenômenos, longe de abstrações, são pilares da computação quântica e abrem espaço para uma nova ontologia.</p>
+                <p>Essa tecnologia não apenas processa dados: ela nos convida a reinterpretar o que consideramos real. A coexistência de múltiplas possibilidades, que colapsam apenas quando observadas, desafia a linearidade de causa e efeito. A realidade se apresenta como algo interativo, mutável, reativo à observação consciente.</p>
+                <p>Esse novo modelo reverbera também na filosofia da mente. O experimento da dupla fenda, ao demonstrar que a observação altera o comportamento da matéria, sugere que nossa interação com o mundo redefine continuamente a própria realidade. A computação quântica materializa essa hipótese ao trazer implicações práticas e mensuráveis.</p>
+                <p>Do ponto de vista computacional, os ganhos são exponenciais. Simulações de moléculas, quebra de criptografias, otimizações logísticas e avanços em inteligência artificial tornam-se viáveis em escalas antes inimagináveis. Mais do que acelerar processos, a computação quântica redefine o campo do possível.</p>
+                <p>Ao substituir certezas absolutas por probabilidades, ela altera a forma como lidamos com informação. Sistemas de decisão, modelos de risco e aprendizado de máquina passam a operar com espectros, não com binarismos. Trata-se de uma precisão nova, mais aderente à complexidade do real.</p>
+                <p>Esse paradigma também inspira outras áreas. A espiritualidade, a arte e a literatura encontram na computação quântica metáforas para múltiplas realidades, observadores ativos e incerteza como princípio. A tecnologia torna-se ponte entre razão e intuição, entre cálculo e contemplação.</p>
+                <p>Entretanto, os desafios técnicos são grandes. Qubits são instáveis, exigem condições extremas, e os sistemas atuais ainda são limitados em escalabilidade e suscetíveis a erros. A teoria avança, mas a prática ainda trilha um caminho lento e cuidadoso.</p>
+                <p>Adicionalmente, é necessário cautela com interpretações equivocadas. A física quântica é rigorosa e empírica, não devendo ser usada como justificativa para visões pseudocientíficas. Sua complexidade exige respeito metodológico e discernimento conceitual.</p>
+                <p>Ainda assim, seu impacto maior pode não ser técnico, mas filosófico. A computação quântica nos convida a rever o que entendemos por realidade, identidade e lógica. Ela propõe um mundo em constante atualização, moldado pela interação entre observador e observado.</p>
+                <p>Em tempos de fronteiras diluídas entre o físico e o digital, a certeza e a incerteza, a computação quântica se ergue como símbolo dessa transição. Não apenas como ferramenta tecnológica, mas como espelho conceitual — refletindo tanto o universo quanto os limites da nossa própria compreensão.</p>
+                <p>No fim, talvez o maior legado da computação quântica seja esse: nos lembrar de que a realidade não é um dado estático, mas uma construção dinâmica. E que o verdadeiro poder está, justamente, em aprender a navegar por esse campo de possibilidades.</p>
+            </div>
+        </div>
+        
+        
+        <div class="article">
+            <div class="article-title">A Vida em Algoritmos: Como os Cálculos Moldam Nossas Escolhas e Comportamentos</div>
+            <div class="article-description">
+                Nossa rotina, por mais espontânea que pareça, está cada vez mais orientada por códigos invisíveis. Este artigo investiga como os algoritmos, presentes em cada aspecto da vida digital, influenciam decisões cotidianas e moldam comportamentos humanos de maneira silenciosa, mas profunda.
+            </div>
+            <button class="read-more-btn" onclick="toggleModal('modal15')" data-modal="modal15">Ler mais</button>
+            <div class="modal-content" id="modal15">
+                <img class="article-img" src="https://i.ibb.co/8gFSh03X/A-vida-em-algoritmos.png" alt="A Vida em Algoritmos">
+                <iframe src="https://drive.google.com/file/d/1jDF80INh4YAMd_aqPBeen5kx23uRERxm/preview" width="100%" height="80"></iframe>
+                <p>É estranho pensar que a nossa rotina diária, por mais espontânea que pareça, seja cada vez mais orientada por linhas invisíveis de código. Desde o instante em que despertamos com o alarme do celular até o momento em que escolhemos um filme para assistir antes de dormir, há uma força silenciosa e constante agindo nos bastidores: os algoritmos.</p>
+                <p>O que antes parecia uma ferramenta técnica limitada a engenheiros e programadores, hoje se tornou parte do cotidiano de qualquer pessoa conectada. Algoritmos não apenas automatizam tarefas: eles aprendem, se adaptam, fazem previsões e simulam comportamentos humanos, tornando-se influentes em níveis inéditos.</p>
+                <p>A grande questão é até que ponto estamos cientes — e no controle — dessa influência. As plataformas digitais moldam nossa visão de mundo com base em interações anteriores, criando bolhas algorítmicas que reforçam crenças e polarizam opiniões. A personalização, apesar de prática, pode restringir horizontes.</p>
+                <p>No consumo, os algoritmos agem como curadores do desejo. Ao cruzar dados massivos, conseguem prever comportamentos com tamanha precisão que confundimos sugestão com vontade. A fronteira entre escolha pessoal e indução algorítmica se torna cada vez mais turva.</p>
+                <p>No mercado de trabalho, a lógica algorítmica também avança. Processos seletivos automatizados, avaliações de desempenho e promoções são mediadas por sistemas que, se mal treinados, podem replicar preconceitos e dificultar contestações, evidenciando a necessidade de maior transparência.</p>
+                <p>Na saúde, o potencial é promissor. Diagnósticos via inteligência artificial e tratamentos personalizados representam avanços. Contudo, o erro algorítmico em diagnósticos e a questão da responsabilidade apontam para a urgência de revisões éticas e jurídicas.</p>
+                <p>O uso público de algoritmos, como no policiamento e políticas sociais, traz dilemas. Sistemas de reconhecimento facial e alocação de recursos automatizados, se baseados em dados enviesados, podem reforçar injustiças ao invés de corrigi-las.</p>
+                <p>Por trás de tudo isso está a opacidade algorítmica. A “caixa-preta” digital compromete a transparência e dificulta a responsabilização, enfraquecendo a cidadania digital. Mesmo hiperconectado, o cidadão se vê impotente diante de decisões que não compreende nem pode contestar.</p>
+                <p>Surge, nesse cenário, a “ética algorítmica”, impulsionada por leis como a LGPD no Brasil e o GDPR na Europa. Transparência, inteligência artificial explicável e auditorias são passos na direção de um uso mais responsável. Mas isso exige, além de legislação, uma transformação cultural.</p>
+                <p>Algoritmos não são neutros: são reflexos das intenções e visões de seus programadores. Compreender quem os escreve, por que e com quais dados é o primeiro passo para questionar suas ações. O desafio é evitar a delegação cega da autonomia humana a sistemas invisíveis.</p>
+                <p>Viver entre algoritmos é viver um paradoxo: mais assistidos e conectados, porém mais condicionados. O desafio está em equilibrar conveniência e consciência, personalização e pluralidade. Não se trata de rejeitá-los, mas de reposicioná-los como ferramentas — e não como condutores de nossas decisões.</p>
+                <p>A vida em algoritmos pode ser eficiente e surpreendente. Mas ela só será verdadeiramente livre se formos capazes de pensar para além dos filtros, sugestões e previsões. Afinal, mesmo no mundo digital, o pensamento autônomo continua sendo o mais poderoso dos algoritmos humanos.</p>
+            </div>
+        </div>
+        
 
         <div class="article">
             <div class="article-title">Homo Digitalis: A Transformação do Ser Humano na Era Tecnológica</div>
