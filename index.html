@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -6,183 +7,209 @@
     <title>Artigos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
-/* ===========================
-   CSS Aprimorado e Integral
-   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap');
 
-/* Box sizing para layouts previsíveis */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-:root {
-  --max-width: 900px;
-  --spacing: 1rem;
-  --color-bg-primary: #e6f0fa;
-  --color-bg-secondary: #fefefe;
-  --color-neon: #00bfff;
-  --color-dark: #101f3f;
-  --font-sans: 'Lucida Sans', 'Lucida Grande', Geneva, Verdana, sans-serif;
-}
-
-/* Corpo */
 body {
-  font-family: var(--font-sans);
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, var(--color-bg-primary), #fff, var(--color-bg-primary));
-  min-height: 100vh;
-  font-size: 16px;
-  line-height: 1.5;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #e6f0fa, #ffffff, #e6f0fa);
+    min-height: 100vh;
 }
 
-/* Cabeçalho */
+/* Cabeçalho com tema cyberpunk, mas sem fundo preto */
 .header {
-  background-color: var(--color-dark);
-  color: var(--color-neon);
-  text-align: center;
-  padding: 2.5rem 0;
-  font-family: 'Orbitron', sans-serif;
-  text-shadow: 0 0 4px var(--color-neon), 0 0 8px var(--color-neon), 0 0 15px var(--color-neon);
-  letter-spacing: .125rem;
+    background-color: #101f3f; /* Azul escuro suave */
+    color: #00bfff; /* Azul neon */
+    text-align: center;
+    padding: 40px 0;
+    font-size: 28px;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 4px #00bfff, 0 0 8px #00bfff, 0 0 15px #00bfff;
+    letter-spacing: 2px;
 }
+
 .header h2 {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 800;
+    margin: 0;
+    font-size: 32px;
+    font-weight: 800;
+    color: #00bfff;
+    text-shadow: 0 0 4px #00bfff, 0 0 8px #00bfff, 0 0 15px #00bfff;
 }
 
-/* Container principal */
-main.container {
-  width: 80%;
-  max-width: var(--max-width);
-  margin: var(--spacing) auto;
-  padding: 0 var(--spacing);
+/* Área dos artigos */
+.container {
+    width: 80%;
+    max-width: 900px;
+    margin: 20px auto;
 }
 
-/* Artigos */
-article.article {
-  background-color: var(--color-bg-secondary);
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,.06);
-  padding: 1.25rem;
-  margin-bottom: 2.5rem;
-}
-article.article:nth-child(even) {
-  background-color: #f0f8ff;
+/* Artigos com cores alternadas suaves */
+.article:nth-child(even) {
+    background-color: #f0f8ff;
 }
 
-/* Título e descrição */
+.article:nth-child(odd) {
+    background-color: #fefefe;
+}
+
+.article {
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+/* Título dos artigos centralizado */
 .article-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: .625rem;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
 }
+
+/* Descrição dos artigos */
 .article-description {
-  font-size: 1.125rem;
-  color: #444;
-  text-align: justify;
-  margin-bottom: 1rem;
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+    text-align: justify;
 }
 
-/* Botão “Ler mais” */
+/* Botões centralizados */
 .read-more-btn {
-  background-color: #333;
-  color: #fff;
-  padding: .625rem 1.25rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto 1rem;
-  transition: background-color .3s ease;
-  font-size: .875rem;
+    background: linear-gradient(to bottom, #444, #000);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto 10px auto;
+    transition: background-color 0.3s ease;
 }
+
 .read-more-btn:hover {
-  background-color: #555;
+    background: linear-gradient(to bottom, #000, #444);
 }
 
-/* Modal */
+/* Conteúdo oculto dos modais */
 .modal-content {
-  display: none;
-  padding: 1.25rem;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 20px rgba(0,0,0,.1);
-  margin-top: 1rem;
-}
-.modal-content.open {
-  display: block;
+    display: none;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
 }
 
-/* Imagem dos artigos */
+/* Imagens dos artigos ajustadas */
 .article-img {
-  width: 100%;
-  max-width: 100%;
-  display: block;
-  margin: 0 auto 1rem;
-  border-radius: 10px;
-}
-
-/* Iframes responsivos */
-.modal-content iframe {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-
-/* Fallback para navegadores sem aspect-ratio */
-@supports not (aspect-ratio: 16/9) {
-  .modal-content iframe {
-    width: 100%;
-    height: auto;
-    min-height: 240px;
-  }
-}
-
-/* Paginação */
-.pagination-container {
-  text-align: center;
-  margin: 1.25rem 0;
-}
-.pagination-container button,
-.pagination-container span {
-  margin: 0 .625rem;
-  padding: .625rem 1.25rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.pagination-container span.active {
-  background-color: #333;
-  color: #fff;
+    width: 850px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 15px auto;
+    border-radius: 10px;
 }
 
 /* Rodapé */
 .footer {
-  text-align: center;
-  padding: .625rem 0;
-  font-weight: bold;
-  color: #131212;
+    background-color: transparent;
+    font-weight: bold;
+    color: #131212;
+    text-align: center;
+    padding: 10px 0;
 }
 
-/* Media queries */
-@media (max-width: 768px) {
-  .article-title { font-size: 1.25rem; }
-  .article-description { font-size: 1rem; }
+/* Paginação */
+.pagination-container {
+    text-align: center;
+    margin: 20px 0;
+    padding: 0;
+    border: none;
 }
-@media (max-width: 400px) {
-  .article-title { font-size: 1.125rem; }
-  .article-description { font-size: .875rem; }
-  /* Aumenta fallback do iframe se necessário */
-  @supports not (aspect-ratio: 16/9) {
-    .modal-content iframe {
-      min-height: 280px;
+
+.page-numbers {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.page-numbers span {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
+
+.page-numbers span.active {
+    background-color: #333;
+    color: #fff;
+}
+
+.page-numbers span:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Botões de paginação */
+button, .read-more-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .read-more-btn:hover {
+    background-color: #555;
+}
+
+/* Responsividade */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 10px;
     }
-  }
+
+    h2 {
+        font-size: 26px;
+    }
+
+    .article-title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .article-description {
+        font-size: 16px;
+        text-align: justify;
+    }
+
+    .article-img {
+        width: 100%;
+    }
 }
+
+@media only screen and (max-width: 400px) {
+    h2 {
+        font-size: 22px;
+    }
+
+    .article-title {
+        font-size: 18px;
+    }
+
+    .article-description {
+        font-size: 14px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -617,7 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Renderiza os botões de páginação
+  // Renderiza os botões de paginação
   const renderPageNumbers = () => {
     pageNumbersContainer.innerHTML = '';
     for (let i = 1; i <= totalPages; i++) {
@@ -629,7 +656,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Navegação por clique nos spans de páginação
+  // Navegação por clique nos números
   pageNumbersContainer.addEventListener('click', (e) => {
     const page = parseInt(e.target.getAttribute('data-page'));
     if (!isNaN(page)) {
@@ -640,14 +667,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Botões anterior/próximo
   prevBtn.addEventListener('click', () => {
-    if (currentPage > 1) {
-      renderArticles(--currentPage);
-    }
+    if (currentPage > 1) renderArticles(--currentPage);
   });
   nextBtn.addEventListener('click', () => {
-    if (currentPage < totalPages) {
-      renderArticles(++currentPage);
-    }
+    if (currentPage < totalPages) renderArticles(++currentPage);
   });
 
   // Fecha todos os modais abertos
@@ -661,9 +684,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Tratamento de abertura/fechamento de modal
+  // Abre/fecha modal ao clicar e fecha ao clicar fora
   document.body.addEventListener('click', (e) => {
-    // Abre/fecha modal ao clicar no botão
     if (e.target.matches('.read-more-btn')) {
       const btn = e.target;
       const modal = document.getElementById(btn.dataset.modal);
@@ -673,7 +695,6 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.setAttribute('aria-hidden', !isOpen);
       return;
     }
-    // Fecha modais ao clicar fora deles
     if (!e.target.closest('.modal-content') && !e.target.matches('.read-more-btn')) {
       closeAllModals();
     }
@@ -681,9 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Fecha modais ao pressionar Esc
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeAllModals();
-    }
+    if (e.key === 'Escape') closeAllModals();
   });
 
   // Inicializa a paginação
