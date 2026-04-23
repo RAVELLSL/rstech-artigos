@@ -1,20 +1,44 @@
 
+
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artigos</title>
+    <meta name="description" content="Coletanea de artigos sobre tecnologia, sociedade, IA e comportamento humano na era digital.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='20' fill='%23101f3f'/%3E%3Ctext x='60' y='78' text-anchor='middle' font-size='64' font-family='Arial' fill='%2300bfff'%3ER%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Orbitron:wght@600;800&family=Spectral:wght@600;700&display=swap');
+
+:root {
+    --surface-1: #ffffff;
+    --surface-2: #f0f8ff;
+    --text-main: #152436;
+    --text-soft: #42566b;
+    --accent: #00bfff;
+    --accent-strong: #0f79ad;
+    --focus-ring: rgba(0, 191, 255, 0.32);
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Manrope', 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
     background: linear-gradient(to right, #e6f0fa, #ffffff, #e6f0fa);
     min-height: 100vh;
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background: linear-gradient(to right, #0c172d, #101c32, #0c172d);
+    color: #e2edf8;
 }
 
 /* Cabeçalho com tema cyberpunk, mas sem fundo preto */
@@ -27,6 +51,39 @@ body {
     font-family: 'Orbitron', sans-serif;
     text-shadow: 0 0 4px #00bfff, 0 0 8px #00bfff, 0 0 15px #00bfff;
     letter-spacing: 2px;
+}
+
+.header-subtitle {
+    margin: 8px 0 0;
+    font-size: 14px;
+    font-family: 'Manrope', 'Segoe UI', sans-serif;
+    color: #9acbe6;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+}
+
+.header-tools {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.theme-toggle-btn {
+    border: 1px solid #00bfff;
+    background: transparent;
+    color: #00bfff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(0, 191, 255, 0.15);
 }
 
 .header h2 {
@@ -44,13 +101,22 @@ body {
     margin: 20px auto;
 }
 
+.container.page-fade {
+    animation: pageSwap 0.32s ease;
+}
+
 /* Artigos com cores alternadas suaves */
 .article:nth-child(even) {
-    background-color: #f0f8ff;
+    background-color: var(--surface-2);
 }
 
 .article:nth-child(odd) {
-    background-color: #fefefe;
+    background-color: var(--surface-1);
+}
+
+body.dark-mode .article:nth-child(even),
+body.dark-mode .article:nth-child(odd) {
+    background-color: #13233d;
 }
 
 .article {
@@ -58,22 +124,82 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
     padding: 20px;
     margin-bottom: 25px;
+    border-left: 4px solid transparent;
+    border: 1px solid #dce9f6;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-left-color 0.25s ease, border-color 0.25s ease;
+    animation: fadeInUp 0.4s ease both;
+}
+
+.article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.13);
+    border-left-color: #00bfff;
+    border-color: #b8d7ee;
 }
 
 /* Título dos artigos centralizado */
 .article-title {
+    font-family: 'Spectral', Georgia, serif;
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
 }
 
+body.dark-mode .article-title {
+    color: #e7f2ff;
+}
+
 /* Descrição dos artigos */
 .article-description {
     font-size: 18px;
-    color: #444;
+    color: var(--text-soft);
     margin-bottom: 15px;
     text-align: justify;
+    line-height: 1.55;
+}
+
+body.dark-mode .article-description {
+    color: #bdd2e8;
+}
+
+.article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 8px 0 10px;
+}
+
+.reading-time {
+    font-size: 12px;
+    color: #6e8297;
+    font-weight: 600;
+}
+
+body.dark-mode .reading-time {
+    color: #86a6c7;
+}
+
+.tag-list {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.tag-pill {
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 4px 9px;
+    background: #d7eefd;
+    color: #153f63;
+}
+
+body.dark-mode .tag-pill {
+    background: #1f3b5b;
+    color: #b8d8f7;
 }
 
 /* Botões centralizados */
@@ -88,39 +214,206 @@ body {
     border-radius: 5px;
     display: block;
     margin: 0 auto 10px auto;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .read-more-btn:hover {
     background: linear-gradient(to bottom, #000, #444);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Conteúdo oculto dos modais */
+/* Backdrop do modal */
+.modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+}
+.modal-backdrop.active {
+    display: block;
+}
+
+/* Modal como overlay centralizado */
 .modal-content {
     display: none;
-    padding: 20px;
-    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%) scale(0.96);
+    width: 92%;
+    max-width: 860px;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 30px 35px;
+    border-radius: 14px;
     background-color: #ffffff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+body.dark-mode .modal-content {
+    background-color: #16263e;
+    color: #dbe7f3;
+}
+
+.modal-content p,
+.modal-content li {
+    line-height: 1.6;
+}
+.modal-content.open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Botão fechar do modal */
+.modal-close-btn {
+    position: sticky;
+    top: 0;
+    float: right;
+    margin: -10px -15px 10px 10px;
+    background: #101f3f;
+    color: #00bfff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 10;
+    padding: 0;
+}
+.modal-close-btn:hover {
+    background: #00bfff;
+    color: #101f3f;
 }
 
 /* Imagens dos artigos ajustadas */
 .article-img {
-    width: 850px;
+    width: 100%;
     max-width: 100%;
     display: block;
     margin: 0 auto 15px auto;
     border-radius: 10px;
 }
 
+/* Barra de busca */
+.search-wrapper {
+    width: 80%;
+    max-width: 900px;
+    margin: 22px auto 0 auto;
+    position: relative;
+}
+
+body.dark-mode .search-wrapper input {
+    background: #13233d;
+    border-color: #2e4a6b;
+    color: #e4f0fb;
+}
+
+body.dark-mode .search-wrapper .search-icon {
+    color: #7ea2c6;
+}
+
+.filters-row {
+    width: 80%;
+    max-width: 900px;
+    margin: 12px auto 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.filters-row select {
+    border: 1px solid #c2d4e8;
+    border-radius: 20px;
+    padding: 8px 12px;
+    background: #fff;
+    color: #2c3f53;
+    font-size: 13px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+body.dark-mode .filters-row select {
+    border-color: #355171;
+    background: #13233d;
+    color: #c9def4;
+}
+.search-wrapper input {
+    width: 100%;
+    padding: 13px 20px 13px 48px;
+    border: 2px solid #d0dce8;
+    border-radius: 30px;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+    background: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+}
+.search-wrapper input:focus {
+    border-color: #00bfff;
+    box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.15);
+}
+
+.filters-row select:focus {
+    outline: none;
+    border-color: var(--accent-strong);
+    box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.16);
+}
+.search-wrapper .search-icon {
+    position: absolute;
+    left: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #90a0b0;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+/* Contador de artigos */
+.article-counter {
+    width: 80%;
+    max-width: 900px;
+    margin: 10px auto 0 auto;
+    font-size: 13px;
+    color: #778899;
+    text-align: right;
+    padding-right: 4px;
+}
+
+body.dark-mode .article-counter,
+body.dark-mode .no-results {
+    color: #84a3c1;
+}
+
+/* Mensagem sem resultados */
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    color: #778899;
+    font-size: 17px;
+}
+
 /* Rodapé */
 .footer {
-    background-color: transparent;
-    font-weight: bold;
-    color: #131212;
+    background-color: #101f3f;
+    color: #7fa8c8;
     text-align: center;
-    padding: 10px 0;
+    padding: 18px 0;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 10px;
 }
 
 /* Paginação */
@@ -142,6 +435,7 @@ body {
     margin: 0 5px;
     border-radius: 5px;
     background-color: #f0f0f0;
+    transition: background-color 0.22s ease, color 0.22s ease, transform 0.18s ease;
 }
 
 .page-numbers span.active {
@@ -149,13 +443,24 @@ body {
     color: #fff;
 }
 
+body.dark-mode .page-numbers span {
+    background-color: #1f3551;
+    color: #d2e6fa;
+}
+
+body.dark-mode .page-numbers span.active {
+    background-color: #00bfff;
+    color: #10213a;
+}
+
 .page-numbers span:hover {
     background-color: #555;
     color: #fff;
+    transform: translateY(-1px);
 }
 
 /* Botões de paginação */
-button, .read-more-btn {
+button {
     background-color: #333;
     color: #fff;
     border: none;
@@ -166,15 +471,117 @@ button, .read-more-btn {
     transition: background-color 0.3s ease;
 }
 
-button:hover, .read-more-btn:hover {
+button:focus-visible,
+.read-more-btn:focus-visible,
+.theme-toggle-btn:focus-visible,
+.back-to-top:focus-visible,
+.filters-row select:focus-visible,
+.search-wrapper input:focus-visible {
+    outline: 2px solid var(--accent-strong);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+button:hover {
     background-color: #555;
+}
+
+body.dark-mode button {
+    background-color: #1f3551;
+    color: #d2e6fa;
+}
+
+body.dark-mode button:hover {
+    background-color: #00bfff;
+    color: #10213a;
+}
+
+.modal-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #00bfff, #6be0ff);
+    z-index: 1200;
+    transition: width 0.15s linear;
+}
+
+.modal-nav {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.modal-actions button,
+.modal-nav button {
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
+.back-to-top {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: #101f3f;
+    color: #00bfff;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1100;
+    display: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.back-to-top.show {
+    display: block;
+}
+
+.back-to-top:hover {
+    transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pageSwap {
+    from { opacity: 0.2; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Responsividade */
 @media only screen and (max-width: 600px) {
     .container {
-        width: 90%;
+        width: 95%;
         padding: 10px;
+    }
+
+    .search-wrapper {
+        width: 95%;
+    }
+
+    .filters-row {
+        width: 95%;
+        justify-content: center;
+    }
+
+    .article-counter {
+        width: 95%;
     }
 
     h2 {
@@ -194,6 +601,16 @@ button:hover, .read-more-btn:hover {
     .article-img {
         width: 100%;
     }
+
+    .modal-content {
+        padding: 20px;
+        max-height: 92vh;
+    }
+
+    .modal-actions,
+    .modal-nav {
+        justify-content: center;
+    }
 }
 
 @media only screen and (max-width: 400px) {
@@ -210,12 +627,897 @@ button:hover, .read-more-btn:hover {
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+body.rebuilt .header,
+body.rebuilt .search-wrapper,
+body.rebuilt .filters-row,
+body.rebuilt .article-counter,
+body.rebuilt .container,
+body.rebuilt .no-results,
+body.rebuilt .pagination-container,
+body.rebuilt .footer,
+body.rebuilt .modal-backdrop,
+body.rebuilt .back-to-top {
+    display: none !important;
+}
+
+body.rebuilt {
+    background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.14), transparent 24%),
+        radial-gradient(circle at top right, rgba(14, 165, 233, 0.16), transparent 26%),
+        linear-gradient(180deg, #f4f7fb 0%, #eef3f9 100%);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+body.rebuilt.dark-mode {
+    background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.12), transparent 20%),
+        radial-gradient(circle at top right, rgba(14, 165, 233, 0.12), transparent 24%),
+        linear-gradient(180deg, #08111f 0%, #0b1525 100%);
+}
+
+.neo-shell {
+    position: relative;
+    z-index: 2;
+    width: min(1180px, calc(100% - 28px));
+    margin: 18px auto 36px;
+    display: grid;
+    gap: 18px;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+.neo-bar,
+.neo-hero,
+.neo-toolbar,
+.neo-featured,
+.neo-grid-wrap,
+.neo-footer,
+.neo-reader {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(17, 41, 71, 0.12);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 22px 70px rgba(18, 32, 56, 0.12);
+}
+
+body.rebuilt.dark-mode .neo-bar,
+body.rebuilt.dark-mode .neo-hero,
+body.rebuilt.dark-mode .neo-toolbar,
+body.rebuilt.dark-mode .neo-featured,
+body.rebuilt.dark-mode .neo-grid-wrap,
+body.rebuilt.dark-mode .neo-footer,
+body.rebuilt.dark-mode .neo-reader {
+    background: rgba(10, 20, 35, 0.84);
+    border-color: rgba(133, 168, 208, 0.14);
+    box-shadow: 0 22px 80px rgba(0, 0, 0, 0.34);
+}
+
+.neo-bar,
+.neo-toolbar,
+.neo-featured,
+.neo-grid-wrap,
+.neo-footer,
+.neo-reader {
+    border-radius: 28px;
+}
+
+.neo-bar {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.neo-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.neo-brand-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+}
+
+.neo-brand strong {
+    display: block;
+    font-family: 'Archivo', sans-serif;
+}
+
+.neo-brand span,
+.neo-muted,
+.neo-results,
+.neo-footer span,
+.neo-footer p,
+.neo-empty p,
+.neo-card-meta,
+.neo-reader-meta {
+    color: var(--text-soft);
+}
+
+.neo-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.neo-pill,
+.neo-open,
+.neo-reader-btn,
+.neo-reader-nav button,
+.neo-reader-close,
+.neo-back-top {
+    border: 1px solid rgba(17, 41, 71, 0.12);
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text-main);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.neo-pill,
+.neo-reader-btn,
+.neo-reader-nav button {
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+body.rebuilt.dark-mode .neo-pill,
+body.rebuilt.dark-mode .neo-open,
+body.rebuilt.dark-mode .neo-reader-btn,
+body.rebuilt.dark-mode .neo-reader-nav button,
+body.rebuilt.dark-mode .neo-reader-close,
+body.rebuilt.dark-mode .neo-back-top {
+    background: #112136;
+    color: var(--text-main);
+    border-color: rgba(133, 168, 208, 0.16);
+}
+
+.neo-pill:hover,
+.neo-open:hover,
+.neo-reader-btn:hover,
+.neo-reader-nav button:hover,
+.neo-reader-close:hover,
+.neo-back-top:hover {
+    transform: translateY(-1px);
+    border-color: rgba(14, 165, 233, 0.38);
+    box-shadow: 0 10px 20px rgba(14, 165, 233, 0.14);
+}
+
+.neo-hero {
+    padding: 22px 24px;
+    border-radius: 36px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.75fr);
+    gap: 12px;
+}
+
+.neo-eyebrow {
+    display: inline-flex;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(14, 165, 233, 0.1);
+    color: #0ea5e9;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.neo-hero-copy h1,
+.neo-featured-copy h2,
+.neo-card h3,
+.neo-reader-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    line-height: 1.02;
+}
+
+.neo-hero-copy h1 {
+    margin: 10px 0 8px;
+    font-size: clamp(1.95rem, 3.1vw, 3.7rem);
+    line-height: 0.95;
+    max-width: 14ch;
+}
+
+.neo-hero-copy p,
+.neo-featured-copy p,
+.neo-card p,
+.neo-reader-content p,
+.neo-reader-content li {
+    line-height: 1.75;
+}
+
+.neo-hero-copy p,
+.neo-featured-copy p,
+.neo-card p {
+    margin: 0;
+    color: var(--text-soft);
+}
+
+.neo-hero-copy p {
+    font-size: 1rem;
+    line-height: 1.55;
+    max-width: 62ch;
+}
+
+.neo-hero-copy .neo-actions {
+    margin-top: 14px !important;
+}
+
+.neo-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.neo-stat,
+.neo-note {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(17, 41, 71, 0.1);
+    border-radius: 18px;
+    padding: 13px;
+}
+
+body.rebuilt.dark-mode .neo-stat,
+body.rebuilt.dark-mode .neo-note {
+    background: rgba(13, 27, 46, 0.86);
+    border-color: rgba(133, 168, 208, 0.12);
+}
+
+.neo-stat strong {
+    display: block;
+    font-family: 'Archivo', sans-serif;
+    font-size: 1.55rem;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.neo-note p {
+    margin: 8px 0 0 !important;
+    line-height: 1.48;
+    font-size: 0.98rem;
+}
+
+.neo-toolbar,
+.neo-featured,
+.neo-grid-wrap,
+.neo-footer {
+    padding: 22px;
+}
+
+.neo-toolbar-top,
+.neo-head,
+.neo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.neo-search-sort {
+    display: grid;
+    grid-template-columns: minmax(250px, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+}
+
+.neo-search {
+    position: relative;
+}
+
+.neo-search i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-soft);
+}
+
+.neo-search input,
+.neo-toolbar select {
+    width: 100%;
+    border: 1px solid rgba(17, 41, 71, 0.12);
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 18px;
+    padding: 14px 16px;
+    color: var(--text-main);
+}
+
+.neo-search input { padding-left: 42px; }
+
+body.rebuilt.dark-mode .neo-search input,
+body.rebuilt.dark-mode .neo-toolbar select {
+    background: #112136;
+    border-color: rgba(133, 168, 208, 0.16);
+    color: var(--text-main);
+}
+
+.neo-chip-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.neo-chip {
+    padding: 9px 14px;
+    border: 1px solid rgba(17, 41, 71, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--text-soft);
+    cursor: pointer;
+    font-size: 0.87rem;
+    font-weight: 600;
+}
+
+.neo-chip.active,
+.neo-chip:hover {
+    background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+    border-color: transparent;
+    color: #fff;
+}
+
+.neo-featured-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+    gap: 18px;
+}
+
+.neo-featured-copy,
+.neo-featured-visual {
+    border-radius: 26px;
+    overflow: hidden;
+}
+
+.neo-featured-copy {
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(20, 184, 166, 0.09));
+    border: 1px solid rgba(14, 165, 233, 0.12);
+}
+
+.neo-featured-copy h2 {
+    margin: 12px 0 10px;
+    font-size: clamp(1.9rem, 3vw, 3rem);
+}
+
+.neo-featured-visual {
+    position: relative;
+    min-height: 300px;
+    background: rgba(14, 165, 233, 0.08);
+}
+
+.neo-featured-visual img,
+.neo-card-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.neo-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.neo-card {
+    grid-column: span 4;
+    min-height: 330px;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    align-content: end;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #13243a;
+    color: #fff;
+}
+
+.neo-card-wide { grid-column: span 8; }
+.neo-card-tall { min-height: 400px; }
+
+.neo-card-bg,
+.neo-card-overlay {
+    position: absolute;
+    inset: 0;
+}
+
+.neo-card-overlay {
+    background: linear-gradient(180deg, rgba(8, 17, 31, 0.08), rgba(8, 17, 31, 0.88));
+}
+
+.neo-card-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 12px;
+}
+
+.neo-card h3 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2vw, 2.2rem);
+}
+
+.neo-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.neo-tags span {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+.neo-card-meta {
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.neo-open {
+    padding: 10px 14px;
+    justify-self: start;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.neo-empty {
+    display: none;
+    text-align: center;
+    padding: 30px 0 6px;
+}
+
+.neo-empty.show { display: block; }
+
+.neo-reader-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 10, 18, 0.58);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.26s ease;
+    z-index: 40;
+}
+
+.neo-reader-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.neo-reader-shell {
+    position: fixed;
+    inset:
+        max(14px, env(safe-area-inset-top))
+        max(14px, env(safe-area-inset-right))
+        max(14px, env(safe-area-inset-bottom))
+        max(14px, env(safe-area-inset-left));
+    display: grid;
+    place-items: center;
+    z-index: 41;
+    pointer-events: none;
+}
+
+.neo-reader {
+    width: min(1240px, 100%);
+    max-height: calc(100vh - 28px);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    transform: translateY(20px) scale(0.985);
+    opacity: 0;
+    transition: transform 0.26s ease, opacity 0.26s ease;
+}
+
+.neo-reader.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.neo-reader-progress {
+    height: 4px;
+    background: rgba(14, 165, 233, 0.1);
+}
+
+.neo-reader-progress span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #0ea5e9, #14b8a6);
+}
+
+.neo-reader-top,
+.neo-reader-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 16px 20px;
+}
+
+.neo-reader-close {
+    width: 44px;
+    height: 44px;
+}
+
+.neo-reader-layout {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+    overflow: hidden;
+}
+
+.neo-reader-side {
+    padding: 16px 18px;
+    border-right: 1px solid rgba(17, 41, 71, 0.12);
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.neo-reader-side::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.neo-reader-title {
+    margin: 0;
+    font-size: clamp(1.5rem, 2vw, 2.2rem);
+    line-height: 1.04;
+}
+
+.neo-reader-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.neo-reader-meta span + span::before {
+    content: '•';
+    margin-right: 10px;
+    opacity: 0.65;
+}
+
+.neo-reader-side .neo-tags {
+    gap: 6px;
+}
+
+.neo-reader-side .neo-tags span {
+    padding: 5px 9px;
+    font-size: 0.74rem;
+}
+
+.neo-reader-image {
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 24px;
+    background: rgba(14, 165, 233, 0.08);
+    display: block;
+}
+
+.neo-reader-audio {
+    width: 100%;
+    height: 56px;
+    border: 0;
+    border-radius: 12px;
+    background: rgba(14, 165, 233, 0.06);
+    margin-bottom: 10px;
+}
+
+.neo-reader-body {
+    min-height: 0;
+    overflow-y: auto;
+    padding: 22px 26px 28px;
+}
+
+.neo-reader-content p,
+.neo-reader-content li {
+    color: var(--text-soft);
+    text-align: justify;
+}
+
+.neo-back-top {
+    position: fixed;
+    right: max(18px, calc(env(safe-area-inset-right) + 10px));
+    bottom: max(18px, calc(env(safe-area-inset-bottom) + 10px));
+    width: 48px;
+    height: 48px;
+    display: none;
+    place-items: center;
+    z-index: 42;
+}
+
+.neo-back-top.show { display: grid; }
+
+@media (max-width: 1080px) {
+    .neo-hero,
+    .neo-featured-card,
+    .neo-reader-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .neo-reader-side {
+        border-right: 0;
+        border-bottom: 1px solid rgba(17, 41, 71, 0.12);
+    }
+
+    .neo-card,
+    .neo-card-wide { grid-column: span 6; }
+}
+
+@media (max-width: 760px) {
+    .neo-shell {
+        width: min(100% - 18px, 1180px);
+    }
+
+    .neo-bar,
+    .neo-toolbar,
+    .neo-featured,
+    .neo-grid-wrap,
+    .neo-footer,
+    .neo-reader,
+    .neo-hero {
+        border-radius: 22px;
+    }
+
+    .neo-hero,
+    .neo-toolbar,
+    .neo-featured,
+    .neo-grid-wrap,
+    .neo-footer,
+    .neo-reader-side,
+    .neo-reader-body {
+        padding: 18px;
+    }
+
+    .neo-search-sort {
+        grid-template-columns: 1fr;
+    }
+
+    .neo-card,
+    .neo-card-wide,
+    .neo-card-tall {
+        grid-column: span 12;
+        min-height: 320px;
+    }
+
+    .neo-reader-shell {
+        inset: 8px;
+    }
+}
+
+@media (max-height: 780px) {
+    .neo-reader {
+        max-height: calc(100vh - 12px);
+    }
+
+    .neo-reader-top,
+    .neo-reader-nav {
+        padding: 10px 14px;
+    }
+
+    .neo-reader-side,
+    .neo-reader-body {
+        padding: 12px 14px;
+    }
+
+    .neo-reader-side {
+        gap: 8px;
+    }
+
+    .neo-reader-title {
+        font-size: clamp(1.2rem, 2vw, 1.75rem);
+    }
+
+    .neo-reader-image {
+        max-height: 160px;
+    }
+
+    .neo-reader-audio {
+        height: 48px;
+        margin-bottom: 8px;
+    }
+
+    .neo-reader-content p,
+    .neo-reader-content li {
+        line-height: 1.58;
+    }
+}
+
     </style>
 </head>
 <body>
+    <div class="neo-shell" id="neo-shell">
+        <header class="neo-bar">
+            <div class="neo-brand">
+                <div class="neo-brand-mark">R</div>
+                <div>
+                    <strong>Artigos</strong>
+                    <span>Arquivo de ensaios sobre tecnologia, cultura e sociedade</span>
+                </div>
+            </div>
+            <div class="neo-actions">
+                <button class="neo-pill" id="neo-random" type="button"><i class="fas fa-random"></i> Surpreenda-me</button>
+                <button class="neo-pill" id="neo-theme-toggle" type="button"><i class="fas fa-adjust"></i> Tema</button>
+            </div>
+        </header>
+
+        <section class="neo-hero">
+            <div class="neo-hero-copy">
+                <span class="neo-eyebrow">Layout recriado do zero</span>
+                <h1>Ideias longas para um mundo curto demais.</h1>
+                <p>
+                    O acervo agora aparece como uma revista digital imersiva: descoberta rapida, filtros tematicos,
+                    destaque editorial e um painel de leitura profundo para cada texto.
+                </p>
+                <div class="neo-actions" style="margin-top:24px;">
+                    <button class="neo-pill" id="neo-jump-featured" type="button"><i class="fas fa-bolt"></i> Ver destaque</button>
+                    <button class="neo-pill" id="neo-open-latest" type="button"><i class="far fa-newspaper"></i> Abrir mais recente</button>
+                </div>
+            </div>
+            <div class="neo-hero-side">
+                <div class="neo-stat-grid">
+                    <div class="neo-stat">
+                        <strong id="neo-stat-total">0</strong>
+                        <span>artigos</span>
+                    </div>
+                    <div class="neo-stat">
+                        <strong id="neo-stat-topics">0</strong>
+                        <span>temas</span>
+                    </div>
+                    <div class="neo-stat">
+                        <strong id="neo-stat-minutes">0</strong>
+                        <span>min de leitura</span>
+                    </div>
+                    <div class="neo-stat">
+                        <strong id="neo-stat-active">01</strong>
+                        <span>destaque</span>
+                    </div>
+                </div>
+                <div class="neo-note">
+                    <span class="neo-eyebrow">Leitura orientada</span>
+                    <p style="margin:12px 0 0;">Pesquise, filtre por assunto e abra cada artigo em um reader dedicado com imagem, audio e navegacao lateral.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="neo-toolbar">
+            <div class="neo-toolbar-top">
+                <div>
+                    <div class="neo-results" id="neo-results">0 artigos disponiveis</div>
+                    <div class="neo-muted">Busca textual, filtros tematicos e ordenacao editorial.</div>
+                </div>
+                <div class="neo-search-sort">
+                    <label class="neo-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="neo-search-input" placeholder="Buscar por titulo, descricao ou ideia central..." autocomplete="off">
+                    </label>
+                    <select id="neo-sort-select" aria-label="Ordenar artigos">
+                        <option value="recent">Mais recentes</option>
+                        <option value="title">Titulo A-Z</option>
+                        <option value="short">Leitura curta</option>
+                        <option value="long">Leitura longa</option>
+                    </select>
+                </div>
+            </div>
+            <div class="neo-chip-row" id="neo-chip-row"></div>
+        </section>
+
+        <section class="neo-featured" id="neo-featured"></section>
+
+        <section class="neo-grid-wrap">
+            <div class="neo-head">
+                <div>
+                    <strong style="display:block;font-family:'Archivo',sans-serif;font-size:1.2rem;">Radar de leituras</strong>
+                    <span class="neo-muted">Um mosaico editorial para navegar pelo acervo com pesos visuais diferentes.</span>
+                </div>
+            </div>
+            <div class="neo-grid" id="neo-grid"></div>
+            <div class="neo-empty" id="neo-empty">
+                <strong>Nenhum artigo encontrado.</strong>
+                <p>Tente outra busca ou remova o filtro atual.</p>
+            </div>
+        </section>
+
+        <footer class="neo-footer">
+            <p>Artigos — tecnologia, comportamento, etica, sociedade e cultura digital.</p>
+            <span>&copy; 2024-2025</span>
+        </footer>
+    </div>
+
+    <div class="neo-reader-backdrop" id="neo-reader-backdrop"></div>
+    <div class="neo-reader-shell">
+        <article class="neo-reader" id="neo-reader" aria-hidden="true">
+            <div class="neo-reader-progress"><span id="neo-reader-progress"></span></div>
+            <div class="neo-reader-top">
+                <span class="neo-muted" id="neo-reader-position">Leitura 1 de 1</span>
+                <button class="neo-reader-close" id="neo-reader-close" type="button" aria-label="Fechar leitura"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="neo-reader-layout">
+                <aside class="neo-reader-side">
+                    <span class="neo-eyebrow" id="neo-reader-kicker">Destaque</span>
+                    <h2 class="neo-reader-title" id="neo-reader-title"></h2>
+                    <div class="neo-reader-meta" id="neo-reader-meta"></div>
+                    <div class="neo-tags" id="neo-reader-tags"></div>
+                    <img class="neo-reader-image" id="neo-reader-image" alt="Capa do artigo" loading="lazy" decoding="async">
+                    <div class="neo-actions">
+                        <button class="neo-reader-btn" id="neo-copy-link" type="button"><i class="fas fa-link"></i> Copiar link</button>
+                        <button class="neo-reader-btn" id="neo-share-link" type="button"><i class="fas fa-share-alt"></i> Compartilhar</button>
+                    </div>
+                </aside>
+                <div class="neo-reader-body" id="neo-reader-body">
+                    <iframe class="neo-reader-audio" id="neo-reader-audio" title="Audio do artigo"></iframe>
+                    <div class="neo-reader-content" id="neo-reader-content"></div>
+                </div>
+            </div>
+            <div class="neo-reader-nav">
+                <button type="button" id="neo-reader-prev"><i class="fas fa-arrow-left"></i> Anterior</button>
+                <button type="button" id="neo-reader-next">Proximo <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </article>
+    </div>
+
+    <button class="neo-back-top" id="neo-back-top" type="button" aria-label="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
+
+    <div class="modal-progress" id="modal-progress"></div>
     <div class="header">
         <h2>Artigos</h2>
+        <p class="header-subtitle">Tecnologia, sociedade e o futuro humano</p>
+        <div class="header-tools">
+            <button class="theme-toggle-btn" id="theme-toggle" type="button"><i class="fas fa-adjust"></i> Alternar tema</button>
+        </div>
     </div>
+    <div class="search-wrapper">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+        <input type="text" id="search-input" placeholder="Buscar artigos por título ou descrição..." autocomplete="off">
+    </div>
+    <div class="filters-row">
+        <select id="tag-filter" aria-label="Filtrar por categoria">
+            <option value="all">Todas as categorias</option>
+            <option value="ia">IA</option>
+            <option value="tecnologia">Tecnologia</option>
+            <option value="sociedade">Sociedade</option>
+            <option value="saude">Saude</option>
+            <option value="etica">Etica</option>
+            <option value="educacao">Educacao</option>
+            <option value="comportamento">Comportamento</option>
+        </select>
+    </div>
+    <div class="article-counter" id="article-counter"></div>
     <div class="container">
 
         <div class="article">
@@ -225,7 +1527,7 @@ button:hover, .read-more-btn:hover {
             </div>
             <button class="read-more-btn" onclick="toggleModal('modal17')" data-modal="modal17">Ler mais</button>
             <div class="modal-content" id="modal17">
-                <img class="article-img" src="https://i.ibb.co/qPh5vGd/O-c-rebro-como-um-computador-biol-gico.png" alt="O cérebro como um computador biológico">
+                <img class="article-img" src="https://i.ibb.co/qPh5vGd/O-c-rebro-como-um-computador-biol-gico.png" alt="O cérebro como um computador biológico" loading="lazy" decoding="async">
                 <iframe src="https://drive.google.com/file/d/1YGFQvzd_vqmHemScFzcHeQen2q1s9wwD/preview" width="100%" height="80"></iframe>
                 <p>Desde que os computadores passaram a integrar a vida cotidiana, tornou-se comum compará-los ao cérebro humano. A ideia de que a mente opera como um sistema de processamento de informações ganhou força na ciência e na cultura, impulsionando avanços em diversas áreas. No entanto, será que essa analogia é precisa ou apenas uma projeção tecnológica sobre a nossa biologia?</p>
                 <p>A princípio, a comparação parece funcional: o cérebro recebe informações, processa, armazena memórias e gera respostas. Neurônios seriam os transistores, axônios e dendritos os fios condutores, e os neurotransmissores os protocolos de comunicação. A memória de trabalho se equipararia à RAM e a de longo prazo ao disco rígido.</p>
@@ -565,8 +1867,8 @@ button:hover, .read-more-btn:hover {
             <div class="article-description">
                 A Inteligência Artificial Generativa (IAG) usa redes neurais para criar conteúdo original em diversos campos, enfrentando desafios éticos e de viés de dados para impulsionar a inovação e eficiência.
             </div>
-            <button class="read-more-btn" onclick="toggleModal('modal7')" data-modal="modal7">Ler mais</button>
-            <div class="modal-content" id="modal7">
+            <button class="read-more-btn" onclick="toggleModal('modal6')" data-modal="modal6">Ler mais</button>
+            <div class="modal-content" id="modal6">
                 <img class="article-img" src="https://i.ibb.co/319B0yQ/1719921305868.jpg" alt="Inteligência Artificial Generativa">
                 <iframe src="https://drive.google.com/file/d/1TwDGuoVHgbWWROIvdHuuycPazadrlSyc/preview" width="100%" height="80"></iframe>
                 <p>A Inteligência Artificial Generativa (IAG) representa um segmento fascinante da inteligência artificial que concentra seus esforços em criar sistemas capazes de produzir conteúdo novo e original, emulando padrões encontrados em conjuntos de dados. Esses sistemas operam com base em princípios de teoria de probabilidade e aprendizado de máquina, aproveitando o poder das redes neurais artificiais para discernir e replicar padrões complexos. A IAG se desdobra em duas abordagens principais: modelos generativos explícitos, que direcionam seus esforços para entender e reproduzir diretamente a distribuição de probabilidade dos dados, e modelos implícitos, que se concentram em transformar uma distribuição simples em uma mais complexa, ampliando assim a capacidade de geração de conteúdo.</p>
@@ -610,7 +1912,9 @@ button:hover, .read-more-btn:hover {
                 <p>À medida que a sinergia entre computação quântica e inteligência artificial se aprofunda, a expectativa é de que sejam alcançados avanços verdadeiramente revolucionários em todos os aspectos da vida humana. Essa colaboração entre duas áreas tão promissoras da tecnologia não apenas promete impulsionar a inovação, mas também tem o potencial de transformar fundamentalmente a maneira como vivemos e interagimos com o mundo ao nosso redor. Em um mundo onde a quantidade de dados gerados continua a crescer exponencialmente, a capacidade dos sistemas baseados em IA de processar e interpretar essas informações de maneira rápida e precisa é crucial. A computação quântica oferece o impulso adicional, proporcionando um poder de processamento sem precedentes para lidar com conjuntos de dados cada vez maiores e mais complexos.</p>
             </div>
         </div>
-    </div>   
+    </div>
+
+    <div class="no-results" id="no-results">Nenhum artigo encontrado para esta busca.</div>
 
     <div class="pagination-container">
         <button id="prev-btn" onclick="prevPage()">Anterior</button>
@@ -618,123 +1922,439 @@ button:hover, .read-more-btn:hover {
         <button id="next-btn" onclick="nextPage()">Próximo</button>
     </div>
 
-    <div class="footer">2024-2025</div>
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
+
+    <div class="footer">&copy; 2024-2025 - Ravell</div>
+
+    <div class="modal-backdrop" id="modal-backdrop"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-    const articlesPerPage = 5;
-    let currentPage = 1;
+    document.body.classList.add('rebuilt');
 
-    const articles = Array.from(document.querySelectorAll('.article')); // Pega todos os artigos do HTML
-    const totalPages = Math.ceil(articles.length / articlesPerPage);
+    const TAG_RULES = {
+        ia: ['ia', 'inteligencia artificial', 'algoritmo', 'algoritmos', 'machine learning'],
+        tecnologia: ['tecnologia', 'digital', 'internet', '5g', 'starlink', 'computacao'],
+        sociedade: ['sociedade', 'social', 'politica', 'publica', 'governo'],
+        saude: ['saude', 'medicina', 'diagnostico', 'depressao', 'ansiedade'],
+        etica: ['etica', 'privacidade', 'vies', 'regulacao', 'desinformacao'],
+        educacao: ['educacao', 'aprendizado', 'ensino', 'escola'],
+        comportamento: ['comportamento', 'relacionamento', 'rotina', 'habilidades']
+    };
 
-    // Função para renderizar os artigos
-    function renderArticles(page) {
-        const start = (page - 1) * articlesPerPage;
-        const end = page * articlesPerPage;
+    const sourceArticles = Array.from(document.querySelectorAll('.container .article'));
+    const searchInput = document.getElementById('neo-search-input');
+    const sortSelect = document.getElementById('neo-sort-select');
+    const chipRow = document.getElementById('neo-chip-row');
+    const resultsEl = document.getElementById('neo-results');
+    const featuredEl = document.getElementById('neo-featured');
+    const gridEl = document.getElementById('neo-grid');
+    const emptyEl = document.getElementById('neo-empty');
+    const randomBtn = document.getElementById('neo-random');
+    const themeBtn = document.getElementById('neo-theme-toggle');
+    const jumpFeaturedBtn = document.getElementById('neo-jump-featured');
+    const openLatestBtn = document.getElementById('neo-open-latest');
+    const backTopBtn = document.getElementById('neo-back-top');
 
-        // Esconde todos os artigos primeiro e garante que não exista margem em artigos ocultos
-        articles.forEach((article, index) => {
-            if (index >= start && index < end) {
-                article.style.display = 'block'; // Mostra o artigo na página
-                article.style.marginBottom = '40px'; // Redefine a margem para artigos visíveis
-            } else {
-                article.style.display = 'none'; // Esconde os outros artigos
-                article.style.marginBottom = '0'; // Remove a margem de artigos ocultos
-            }
+    const readerBackdrop = document.getElementById('neo-reader-backdrop');
+    const reader = document.getElementById('neo-reader');
+    const readerClose = document.getElementById('neo-reader-close');
+    const readerProgress = document.getElementById('neo-reader-progress');
+    const readerPosition = document.getElementById('neo-reader-position');
+    const readerKicker = document.getElementById('neo-reader-kicker');
+    const readerTitle = document.getElementById('neo-reader-title');
+    const readerMeta = document.getElementById('neo-reader-meta');
+    const readerTags = document.getElementById('neo-reader-tags');
+    const readerImage = document.getElementById('neo-reader-image');
+    const readerAudio = document.getElementById('neo-reader-audio');
+    const readerBody = document.getElementById('neo-reader-body');
+    const readerContent = document.getElementById('neo-reader-content');
+    const readerPrev = document.getElementById('neo-reader-prev');
+    const readerNext = document.getElementById('neo-reader-next');
+    const readerCopy = document.getElementById('neo-copy-link');
+    const readerShare = document.getElementById('neo-share-link');
+
+    const statTotal = document.getElementById('neo-stat-total');
+    const statTopics = document.getElementById('neo-stat-topics');
+    const statMinutes = document.getElementById('neo-stat-minutes');
+    const statActive = document.getElementById('neo-stat-active');
+
+    let activeTag = 'all';
+    let activeArticleId = null;
+    let visibleArticles = [];
+
+    function safeThemeLoad() {
+        try {
+            return localStorage.getItem('ravellTheme');
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function safeThemeSave(theme) {
+        try {
+            localStorage.setItem('ravellTheme', theme);
+        } catch (error) {
+        }
+    }
+
+    function inferTags(title, desc) {
+        const text = (title + ' ' + desc).toLowerCase();
+        const tags = [];
+
+        Object.keys(TAG_RULES).forEach(function (key) {
+            const terms = TAG_RULES[key];
+            const hasMatch = terms.some(function (term) { return text.indexOf(term) >= 0; });
+            if (hasMatch) tags.push(key);
         });
 
-        renderPageNumbers();
-        scrollToTop();
-
-        // Habilita/Desabilita os botões "anterior" e "próximo"
-        document.getElementById('prev-btn').disabled = page === 1;
-        document.getElementById('next-btn').disabled = page === totalPages;
+        if (!tags.length) tags.push('tecnologia');
+        return tags;
     }
 
-    // Função para gerar os números da paginação
-    function renderPageNumbers() {
-        const pageNumbersContainer = document.getElementById('page-numbers');
-        pageNumbersContainer.innerHTML = ''; // Limpa o conteúdo anterior
+    const articles = sourceArticles.map(function (article, index) {
+        const titleEl = article.querySelector('.article-title');
+        const descEl = article.querySelector('.article-description');
+        const modalEl = article.querySelector('.modal-content');
+        const imgEl = modalEl ? modalEl.querySelector('img') : null;
+        const iframeEl = modalEl ? modalEl.querySelector('iframe') : null;
+        const audioSrc = iframeEl ? (iframeEl.getAttribute('src') || '') : '';
+        const clone = modalEl ? modalEl.cloneNode(true) : null;
 
-        for (let i = 1; i <= totalPages; i++) {
-            const pageNumberElement = document.createElement('span');
-            pageNumberElement.innerText = i;
-            if (i === currentPage) {
-                pageNumberElement.classList.add('active');
-            }
-            pageNumberElement.addEventListener('click', () => goToPage(i));
-            pageNumbersContainer.appendChild(pageNumberElement);
+        if (clone) {
+            Array.from(clone.querySelectorAll('img, iframe, button')).forEach(function (node) { node.remove(); });
+        }
+
+        if (iframeEl) iframeEl.removeAttribute('src');
+
+        const title = titleEl ? titleEl.textContent.trim() : 'Sem titulo';
+        const description = descEl ? descEl.textContent.trim() : '';
+        const contentHTML = clone ? clone.innerHTML.trim() : '';
+        const textOnly = clone ? clone.textContent.trim() : description;
+        const words = textOnly ? textOnly.split(/\s+/).filter(Boolean).length : 0;
+        const minutes = Math.max(1, Math.ceil(words / 220));
+        const tags = inferTags(title, description);
+
+        return {
+            id: modalEl ? modalEl.id : 'article-' + index,
+            title: title,
+            description: description,
+            image: imgEl ? imgEl.getAttribute('src') : '',
+            imageAlt: imgEl ? imgEl.getAttribute('alt') : title,
+            audio: audioSrc,
+            contentHTML: contentHTML,
+            words: words,
+            minutes: minutes,
+            tags: tags,
+            index: index
+        };
+    });
+
+    // Remove estrutura legada apos extrair os dados para reduzir custo de layout/memoria.
+    [
+        '.header',
+        '.search-wrapper',
+        '.filters-row',
+        '.article-counter',
+        '.container',
+        '.no-results',
+        '.pagination-container',
+        '.footer',
+        '.modal-backdrop',
+        '.modal-progress',
+        '#back-to-top'
+    ].forEach(function (selector) {
+        const node = document.querySelector(selector);
+        if (node) node.remove();
+    });
+
+    function titleCaseTag(tag) {
+        return tag.charAt(0).toUpperCase() + tag.slice(1);
+    }
+
+    function updateStats() {
+        const uniqueTags = new Set();
+        let totalMinutes = 0;
+
+        articles.forEach(function (article) {
+            article.tags.forEach(function (tag) { uniqueTags.add(tag); });
+            totalMinutes += article.minutes;
+        });
+
+        statTotal.textContent = String(articles.length).padStart(2, '0');
+        statTopics.textContent = String(uniqueTags.size).padStart(2, '0');
+        statMinutes.textContent = String(totalMinutes);
+        statActive.textContent = '01';
+    }
+
+    function renderChips() {
+        const uniqueTags = [];
+        articles.forEach(function (article) {
+            article.tags.forEach(function (tag) {
+                if (uniqueTags.indexOf(tag) === -1) uniqueTags.push(tag);
+            });
+        });
+
+        chipRow.innerHTML = '';
+
+        ['all'].concat(uniqueTags).forEach(function (tag) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'neo-chip' + (tag === activeTag ? ' active' : '');
+            button.textContent = tag === 'all' ? 'Tudo' : titleCaseTag(tag);
+            button.addEventListener('click', function () {
+                activeTag = tag;
+                renderChips();
+                renderAll();
+            });
+            chipRow.appendChild(button);
+        });
+    }
+
+    function getFilteredArticles() {
+        const search = searchInput.value.toLowerCase().trim();
+        const sort = sortSelect.value;
+
+        const filtered = articles.filter(function (article) {
+            const tagOk = activeTag === 'all' || article.tags.indexOf(activeTag) >= 0;
+            const text = (article.title + ' ' + article.description + ' ' + article.tags.join(' ')).toLowerCase();
+            const searchOk = !search || text.indexOf(search) >= 0;
+            return tagOk && searchOk;
+        });
+
+        filtered.sort(function (a, b) {
+            if (sort === 'title') return a.title.localeCompare(b.title, 'pt-BR');
+            if (sort === 'short') return a.minutes - b.minutes;
+            if (sort === 'long') return b.minutes - a.minutes;
+            return a.index - b.index;
+        });
+
+        return filtered;
+    }
+
+    function renderFeatured(article) {
+        if (!article) {
+            featuredEl.innerHTML = '';
+            return;
+        }
+
+        featuredEl.innerHTML = `
+            <div class="neo-featured-card">
+                <div class="neo-featured-copy">
+                    <span class="neo-eyebrow">Destaque editorial</span>
+                    <h2>${article.title}</h2>
+                    <p>${article.description}</p>
+                    <div class="neo-tags">${article.tags.map(function (tag) { return `<span>#${tag}</span>`; }).join('')}</div>
+                    <div class="neo-actions" style="margin-top:8px;">
+                        <button class="neo-pill" type="button" data-open-id="${article.id}"><i class="fas fa-book-open"></i> Ler artigo</button>
+                    </div>
+                </div>
+                <div class="neo-featured-visual">
+                    <img src="${article.image}" alt="${article.imageAlt}" loading="lazy" decoding="async" sizes="(max-width: 760px) 100vw, 38vw" referrerpolicy="no-referrer">
+                </div>
+            </div>
+        `;
+
+        const openButton = featuredEl.querySelector('[data-open-id]');
+        if (openButton) {
+            openButton.addEventListener('click', function () { openReader(article.id); });
         }
     }
 
-    // Função para ir para uma página específica
-    function goToPage(page) {
-        currentPage = page;
-        renderArticles(currentPage);
+    function cardClass(index) {
+        if (index === 0) return 'neo-card neo-card-wide';
+        if (index % 5 === 2) return 'neo-card neo-card-tall';
+        if (index % 6 === 4) return 'neo-card neo-card-wide';
+        return 'neo-card';
     }
 
-    // Função para ir para a próxima página
-    function nextPage() {
-        if (currentPage < totalPages) {
-            currentPage++;
-            renderArticles(currentPage);
+    function renderGrid() {
+        gridEl.innerHTML = '';
+
+        visibleArticles.forEach(function (article, index) {
+            const card = document.createElement('article');
+            card.className = cardClass(index);
+            card.innerHTML = `
+                <img class="neo-card-bg" src="${article.image}" alt="${article.imageAlt}" loading="lazy" decoding="async" sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw" referrerpolicy="no-referrer">
+                <div class="neo-card-overlay"></div>
+                <div class="neo-card-inner">
+                    <div class="neo-card-meta">Leitura ${article.minutes} min • Artigo ${String(article.index + 1).padStart(2, '0')}</div>
+                    <h3>${article.title}</h3>
+                    <p>${article.description}</p>
+                    <div class="neo-tags">${article.tags.slice(0, 3).map(function (tag) { return `<span>#${tag}</span>`; }).join('')}</div>
+                    <button class="neo-open" type="button">Ler ensaio</button>
+                </div>
+            `;
+            const button = card.querySelector('.neo-open');
+            button.addEventListener('click', function () { openReader(article.id); });
+            card.addEventListener('click', function (event) {
+                if (event.target && event.target.classList.contains('neo-open')) return;
+                openReader(article.id);
+            });
+            gridEl.appendChild(card);
+        });
+
+        emptyEl.classList.toggle('show', visibleArticles.length === 0);
+    }
+
+    function renderAll() {
+        visibleArticles = getFilteredArticles();
+        resultsEl.textContent = `${visibleArticles.length} artigo${visibleArticles.length === 1 ? '' : 's'} disponive${visibleArticles.length === 1 ? 'l' : 'is'}`;
+        renderFeatured(visibleArticles[0]);
+        renderGrid();
+    }
+
+    function articleById(articleId) {
+        return articles.find(function (article) { return article.id === articleId; });
+    }
+
+    function updateReaderNav(article) {
+        const currentIndex = visibleArticles.findIndex(function (item) { return item.id === article.id; });
+        readerPosition.textContent = `Leitura ${currentIndex + 1} de ${visibleArticles.length}`;
+        readerPrev.disabled = currentIndex <= 0;
+        readerNext.disabled = currentIndex >= visibleArticles.length - 1;
+    }
+
+    function openReader(articleId) {
+        const article = articleById(articleId);
+        if (!article) return;
+
+        activeArticleId = articleId;
+        readerKicker.textContent = article.tags.length ? titleCaseTag(article.tags[0]) : 'Leitura';
+        readerTitle.textContent = article.title;
+        readerMeta.innerHTML = `<span>${article.minutes} min de leitura</span><span>${article.words} palavras</span>`;
+        readerTags.innerHTML = article.tags.map(function (tag) { return `<span>#${tag}</span>`; }).join('');
+        readerImage.src = article.image;
+        readerImage.alt = article.imageAlt;
+        readerImage.setAttribute('sizes', '(max-width: 1080px) 100vw, 32vw');
+        readerImage.setAttribute('referrerpolicy', 'no-referrer');
+        readerAudio.src = article.audio;
+        readerContent.innerHTML = article.contentHTML;
+        readerBody.scrollTop = 0;
+        readerProgress.style.width = '0%';
+        updateReaderNav(article);
+        readerBackdrop.classList.add('open');
+        reader.classList.add('open');
+        reader.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', '#' + article.id);
         }
     }
 
-    // Função para ir para a página anterior
-    function prevPage() {
-        if (currentPage > 1) {
-            currentPage--;
-            renderArticles(currentPage);
+    function closeReader() {
+        readerBackdrop.classList.remove('open');
+        reader.classList.remove('open');
+        reader.setAttribute('aria-hidden', 'true');
+        readerAudio.src = '';
+        document.body.style.overflow = '';
+        activeArticleId = null;
+        readerProgress.style.width = '0%';
+
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
         }
     }
 
-    // Função para rolar para o topo ao mudar de página
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    function openAdjacent(step) {
+        if (!activeArticleId) return;
+        const currentIndex = visibleArticles.findIndex(function (item) { return item.id === activeArticleId; });
+        if (currentIndex < 0) return;
+        const target = visibleArticles[currentIndex + step];
+        if (!target) return;
+        openReader(target.id);
     }
 
-    // Função para abrir e fechar os modais
-    function toggleModal(modalId) {
-        const modal = document.getElementById(modalId);
-        const btn = document.querySelector(`button[data-modal="${modalId}"]`);
+    function copyCurrentLink() {
+        if (!activeArticleId) return;
+        const url = window.location.href.split('#')[0] + '#' + activeArticleId;
+        const fallback = function () {
+            const area = document.createElement('textarea');
+            area.value = url;
+            document.body.appendChild(area);
+            area.select();
+            document.execCommand('copy');
+            document.body.removeChild(area);
+        };
 
-        if (modal.style.display === 'none' || modal.style.display === '') {
-            modal.style.display = 'block';
-            btn.textContent = 'Fechar';
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(url).catch(fallback);
         } else {
-            modal.style.display = 'none';
-            btn.textContent = 'Ler mais';
+            fallback();
         }
     }
 
-    // Fechar o modal ao clicar fora dele
-    window.addEventListener('click', function(event) {
-        const modals = document.querySelectorAll('.modal-content');
-        modals.forEach(modal => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                const btn = document.querySelector(`button[data-modal="${modal.id}"]`);
-                btn.textContent = 'Ler mais';
-            }
-        });
+    function shareCurrent() {
+        if (!activeArticleId) return;
+        const article = articleById(activeArticleId);
+        if (!article) return;
+        const url = window.location.href.split('#')[0] + '#' + activeArticleId;
+        if (navigator.share) {
+            navigator.share({ title: article.title, text: article.description, url: url });
+        } else {
+            window.open('https://wa.me/?text=' + encodeURIComponent(article.title + ' ' + url), '_blank');
+        }
+    }
+
+    const savedTheme = safeThemeLoad();
+    if (savedTheme === 'dark') document.body.classList.add('dark-mode');
+
+    themeBtn.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+        safeThemeSave(document.body.classList.contains('dark-mode') ? 'dark' : 'light');
     });
 
-    // Inicializa os artigos e a paginação
-    renderArticles(currentPage);
-
-    // Adiciona eventos aos botões "anterior" e "próximo"
-    document.getElementById('prev-btn').addEventListener('click', prevPage);
-    document.getElementById('next-btn').addEventListener('click', nextPage);
-
-    // Adiciona eventos para os botões "Ler mais" de cada artigo
-    document.querySelectorAll('.read-more-btn').forEach(button => {
-        const modalId = button.getAttribute('data-modal');
-        button.addEventListener('click', () => toggleModal(modalId));
+    searchInput.addEventListener('input', renderAll);
+    sortSelect.addEventListener('change', renderAll);
+    randomBtn.addEventListener('click', function () {
+        const list = visibleArticles.length ? visibleArticles : articles;
+        const randomArticle = list[Math.floor(Math.random() * list.length)];
+        if (randomArticle) openReader(randomArticle.id);
     });
+    jumpFeaturedBtn.addEventListener('click', function () {
+        const node = document.getElementById('neo-featured');
+        if (node) node.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    openLatestBtn.addEventListener('click', function () {
+        if (articles[0]) openReader(articles[0].id);
+    });
+
+    readerClose.addEventListener('click', closeReader);
+    readerBackdrop.addEventListener('click', closeReader);
+    readerPrev.addEventListener('click', function () { openAdjacent(-1); });
+    readerNext.addEventListener('click', function () { openAdjacent(1); });
+    readerCopy.addEventListener('click', copyCurrentLink);
+    readerShare.addEventListener('click', shareCurrent);
+
+    readerBody.addEventListener('scroll', function () {
+        const max = readerBody.scrollHeight - readerBody.clientHeight;
+        const percent = max > 0 ? (readerBody.scrollTop / max) * 100 : 0;
+        readerProgress.style.width = percent + '%';
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && activeArticleId) closeReader();
+        if (event.key === 'ArrowLeft' && activeArticleId) openAdjacent(-1);
+        if (event.key === 'ArrowRight' && activeArticleId) openAdjacent(1);
+    });
+
+    window.addEventListener('scroll', function () {
+        backTopBtn.classList.toggle('show', window.scrollY > 280);
+    });
+    backTopBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    updateStats();
+    renderChips();
+    renderAll();
+
+    if (window.location.hash) {
+        const article = articleById(window.location.hash.slice(1));
+        if (article) openReader(article.id);
+    }
 });
-
     </script>
 </body>
 </html>
