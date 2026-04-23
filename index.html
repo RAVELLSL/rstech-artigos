@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -657,6 +655,8 @@ body.rebuilt {
 }
 
 body.rebuilt.dark-mode {
+    --text-main: #e2edf8;
+    --text-soft: #9db7d3;
     background:
         radial-gradient(circle at top left, rgba(20, 184, 166, 0.12), transparent 20%),
         radial-gradient(circle at top right, rgba(14, 165, 233, 0.12), transparent 24%),
@@ -1162,6 +1162,14 @@ body.rebuilt.dark-mode .neo-toolbar select {
 .neo-reader-close {
     width: 44px;
     height: 44px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+}
+
+.neo-reader-close i {
+    line-height: 1;
+    transform: translateY(-0.5px);
 }
 
 .neo-reader-layout {
@@ -1235,7 +1243,37 @@ body.rebuilt.dark-mode .neo-toolbar select {
     border: 0;
     border-radius: 12px;
     background: rgba(14, 165, 233, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 4;
     margin-bottom: 10px;
+}
+
+.neo-reader-image {
+    cursor: zoom-in;
+}
+
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    place-items: center;
+    background: rgba(2, 10, 18, 0.84);
+    backdrop-filter: blur(4px);
+    z-index: 90;
+    padding: clamp(14px, 4vw, 28px);
+}
+
+.image-lightbox.open {
+    display: grid;
+}
+
+.image-lightbox img {
+    width: min(1200px, 100%);
+    max-height: calc(100vh - 40px);
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.42);
 }
 
 .neo-reader-body {
@@ -1317,6 +1355,13 @@ body.rebuilt.dark-mode .neo-toolbar select {
 
     .neo-reader-shell {
         inset: 8px;
+    }
+
+    .neo-back-top {
+        right: max(10px, calc(env(safe-area-inset-right) + 8px));
+        bottom: max(86px, calc(env(safe-area-inset-bottom) + 74px));
+        width: 44px;
+        height: 44px;
     }
 }
 
@@ -1489,6 +1534,10 @@ body.rebuilt.dark-mode .neo-toolbar select {
                 <button type="button" id="neo-reader-next">Proximo <i class="fas fa-arrow-right"></i></button>
             </div>
         </article>
+    </div>
+
+    <div class="image-lightbox" id="image-lightbox" aria-hidden="true" role="dialog" aria-label="Imagem ampliada">
+        <img id="image-lightbox-img" alt="Imagem ampliada do artigo" loading="lazy" decoding="async">
     </div>
 
     <button class="neo-back-top" id="neo-back-top" type="button" aria-label="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
@@ -1973,6 +2022,8 @@ body.rebuilt.dark-mode .neo-toolbar select {
     const readerNext = document.getElementById('neo-reader-next');
     const readerCopy = document.getElementById('neo-copy-link');
     const readerShare = document.getElementById('neo-share-link');
+    const imageLightbox = document.getElementById('image-lightbox');
+    const imageLightboxImg = document.getElementById('image-lightbox-img');
 
     const statTotal = document.getElementById('neo-stat-total');
     const statTopics = document.getElementById('neo-stat-topics');
@@ -2247,6 +2298,8 @@ body.rebuilt.dark-mode .neo-toolbar select {
         readerBackdrop.classList.remove('open');
         reader.classList.remove('open');
         reader.setAttribute('aria-hidden', 'true');
+        imageLightbox.classList.remove('open');
+        imageLightbox.setAttribute('aria-hidden', 'true');
         readerAudio.src = '';
         document.body.style.overflow = '';
         activeArticleId = null;
@@ -2297,6 +2350,20 @@ body.rebuilt.dark-mode .neo-toolbar select {
         }
     }
 
+    function openImageLightbox() {
+        if (!readerImage.src) return;
+        imageLightboxImg.src = readerImage.src;
+        imageLightboxImg.alt = readerImage.alt || 'Imagem ampliada do artigo';
+        imageLightbox.classList.add('open');
+        imageLightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeImageLightbox() {
+        imageLightbox.classList.remove('open');
+        imageLightbox.setAttribute('aria-hidden', 'true');
+        imageLightboxImg.src = '';
+    }
+
     const savedTheme = safeThemeLoad();
     if (savedTheme === 'dark') document.body.classList.add('dark-mode');
 
@@ -2326,6 +2393,8 @@ body.rebuilt.dark-mode .neo-toolbar select {
     readerNext.addEventListener('click', function () { openAdjacent(1); });
     readerCopy.addEventListener('click', copyCurrentLink);
     readerShare.addEventListener('click', shareCurrent);
+    readerImage.addEventListener('click', openImageLightbox);
+    imageLightbox.addEventListener('click', closeImageLightbox);
 
     readerBody.addEventListener('scroll', function () {
         const max = readerBody.scrollHeight - readerBody.clientHeight;
@@ -2334,6 +2403,10 @@ body.rebuilt.dark-mode .neo-toolbar select {
     });
 
     document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && imageLightbox.classList.contains('open')) {
+            closeImageLightbox();
+            return;
+        }
         if (event.key === 'Escape' && activeArticleId) closeReader();
         if (event.key === 'ArrowLeft' && activeArticleId) openAdjacent(-1);
         if (event.key === 'ArrowRight' && activeArticleId) openAdjacent(1);
